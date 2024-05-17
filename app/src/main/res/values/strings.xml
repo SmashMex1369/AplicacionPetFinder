@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProyectoPetFinder</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
 </resources>
