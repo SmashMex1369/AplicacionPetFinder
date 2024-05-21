@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">ProyectoPetFinder</string>
+    <string name="app_name">PetFinder</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="imagen_perfil">Imagen del perfil</string>
+    <string name="imagen_buscar">Icono de busqueda</string>
+    <string name="tv_perdidos">Perdidos</string>
+    <string name="tv_encontrados">Encontrados</string>
+    <string name="tv_ordenar_filtrar">Ordenar y filtrar</string>
+    <string name="fabtn_acciones">Boton flotante acciones</string>
 </resources>
