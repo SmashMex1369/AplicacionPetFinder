@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "125473494744",
+    "firebase_url": "https://petfinder-8c40e-default-rtdb.firebaseio.com",
+    "project_id": "petfinder-8c40e",
+    "storage_bucket": "petfinder-8c40e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125473494744:android:a8508d7437098420d929ad",
+        "android_client_info": {
+          "package_name": "com.example.proyectopetfinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBicYMKdSP97c2Z8k3vjadtBjxi8tthmHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

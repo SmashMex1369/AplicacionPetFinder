@@ -117,7 +117,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
-        app:shapeAppearance=""
         android:contentDescription="@string/fabtn_acciones"/>
 
 
