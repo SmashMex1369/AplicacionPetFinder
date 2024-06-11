@@ -1,53 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainPageActivity"
+    android:fitsSystemWindows="true"
     android:background="@color/amarilloClaro">
 
-    <LinearLayout
-        android:id="@+id/linear_header"
+    <View
+        android:id="@+id/view_header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/rojo"
+        app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
-        android:layout_alignParentTop="true">
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/round_corner"
-            android:contentDescription="@string/imagen_perfil"/>
+        android:layout_alignParentTop="true"/>
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imab_profile_picture"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_header"
+        app:layout_constraintBottom_toBottomOf="@id/view_header"
+        app:shapeAppearanceOverlay="@style/CircularImage"
+        app:srcCompat="@drawable/image_perfil_por_defecto"
+        android:contentDescription="@string/imagen_perfil"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/itim"
-            android:text="@string/app_name"
-            android:textSize="50sp"
-            android:textColor="@color/black"
-            android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/tv_petfinder"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_gravity="bottom"
+        android:fontFamily="@font/itim"
+        android:text="@string/app_name"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/imab_profile_picture"
+        app:layout_constraintBottom_toBottomOf="@id/view_header"
+        android:textColor="@color/black"
+        android:textSize="50sp" />
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="78dp"
-            android:contentDescription="@string/imagen_buscar"/>
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="9dp"
+        app:layout_constraintBottom_toBottomOf="@id/view_header"
+        android:contentDescription="@string/imagen_buscar" />
 
-    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linear_perdidos_encontrados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_header"
-        android:layout_marginTop="15dp"
+        android:layout_below="@id/view_header"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/view_header"
         android:orientation="horizontal">
 
         <TextView
@@ -75,6 +87,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linear_perdidos_encontrados"
         android:layout_alignTop="@id/linear_perdidos_encontrados">
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,23 +114,51 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_ordenar_filtrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:textSize="20sp"
         android:fontFamily="@font/itim"
-        android:layout_below="@id/linear_perdidos_encontrados"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_perdidos_encontrados"
         android:text="@string/tv_ordenar_filtrar"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        app:drawableEndCompat="@drawable/filter_list" />
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_ordenar_filtrar"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_publicaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/naranjaMedio"
+        android:src="@drawable/priority_high"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/fabtn_acciones"/>
 
+    <!--<View
+        android:id="@+id/view_navegacion"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/rojo"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-</RelativeLayout>
+        android:layout_alignParentBottom="true"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

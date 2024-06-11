@@ -1,5 +1,7 @@
 package com.example.proyectopetfinder
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,5 +17,8 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         enableEdgeToEdge()
         setContentView(view)
+        window.statusBarColor = Color.parseColor(R.color.rojo.toString())
+        window.navigationBarColor = Color.parseColor(R.color.rojo.toString())
+
     }
 }
