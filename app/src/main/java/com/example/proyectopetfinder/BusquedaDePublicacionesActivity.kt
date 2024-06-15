@@ -79,7 +79,7 @@ class BusquedaDePublicacionesActivity : AppCompatActivity() {
         })*/
 
         val spinnerRegion: Spinner = findViewById(binding.spinner3.id)
-        val listaRegion = arrayOf("Xalapa", "Coatepec")
+        val listaRegion = arrayOf("ArcoSur", "Tecnológico","Economía", "Centro")
         val adaptadorRegion = ArrayAdapter<String>(this, R.layout.spinner, listaRegion)
         spinnerRegion.adapter = adaptadorRegion
 
