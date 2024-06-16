@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ed_hint_nombre_usuario">Nombre de usuario</string>
+    <string name="ed_hint_contraseña">Contraseña</string>
+    <string name="ed_hint_correo">Correo electrónico</string>
+    <string name="ed_hint_celular">Número celular</string>
+    <string name="ed_hint_direccion">Dirección</string>
+    <string name="imagen_logo">App logo</string>
+    <string name="btn_registrar">Registrar</string>
+    <string name="tv_buscar">Buscar</string>
+    <string name="contactar_dueño">Contactar Dueño</string>
+    <string name="dueño_de">Dueño de:</string>
+</resources>

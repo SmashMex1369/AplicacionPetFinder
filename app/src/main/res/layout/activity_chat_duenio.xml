@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/amarilloClaro"
+    tools:context=".ChatDuenioActivity">
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:fontFamily="@font/itim"
+        android:background="@color/rojo"
+        android:text="@string/contactar_dueño"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_datos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/naranjaClaro"
+        android:orientation="vertical"
+        android:layout_below="@id/tv_titulo">
+
+        <TextView
+            android:id="@+id/tv_dueño_de"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:fontFamily="@font/itim"
+            android:text="@string/dueño_de"
+            />
+
+        <ImageView
+            android:id="@+id/iv_imagen"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:cornerRadius="100dp"
+            android:src="@mipmap/ic_launcher"
+            />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_notas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_datos"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        app:cornerRadius="100dp">
+
+        <EditText
+            android:id="@+id/et_mensaje"
+            android:layout_width="250dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:cornerRadius="50dp"
+            />
+
+        <Button
+            android:id="@+id/btn_imagen"
+            android:layout_width="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent"
+            />
+
+        <Button
+            android:id="@+id/btn_enviar"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
