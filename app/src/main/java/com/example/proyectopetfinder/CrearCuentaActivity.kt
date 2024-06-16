@@ -1,20 +1,17 @@
 package com.example.proyectopetfinder
 
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.proyectopetfinder.databinding.ActivityMainBinding
+import com.example.proyectopetfinder.databinding.ActivityCrearCuentaBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+class CrearCuentaActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityCrearCuentaBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityCrearCuentaBinding.inflate(layoutInflater)
         val view = binding.root
         enableEdgeToEdge()
         setContentView(view)

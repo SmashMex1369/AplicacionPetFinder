@@ -13,9 +13,8 @@
         android:theme="@style/Theme.ProyectoPetFinder"
         tools:targetApi="31">
         <activity
-            android:name=".BusquedaDePublicacionesActivity"
-            android:exported="true"
-            >
+            android:name=".VerPublicacionActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,16 +22,27 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".BusquedaDePublicacionesActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".MainPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="nosensor">
+
+        </activity>
+        <activity
+            android:name=".CrearCuentaActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor">
+
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true"
+            android:screenOrientation="nosensor">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
         </activity>
     </application>
 
