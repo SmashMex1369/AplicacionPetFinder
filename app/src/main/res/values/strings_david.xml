@@ -9,8 +9,9 @@
     <string name="btn_registrar">Registrar</string>
     <string name="tv_buscar">Buscar</string>
     <string name="contactar_dueño">Contactar Dueño</string>
-    <string name="dueño_de">Dueño de: </string>
+    <string name="dueño">Dueño: </string>
     <string name="chat_de_busqueda">Chat de Búsqueda</string>
     <string name="buscando_a">Buscando a: </string>
     <string name="toca_para_cerrar">Toca la imagen para quitar</string>
+    <string name="chats">Chats</string>
 </resources>

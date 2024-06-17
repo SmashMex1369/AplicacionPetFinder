@@ -39,7 +39,7 @@
             android:textStyle="bold"
             android:textSize="35sp"
             android:fontFamily="@font/itim"
-            android:text="@string/dueño_de"
+            android:text="@string/dueño"
             />
 
         <ImageView
