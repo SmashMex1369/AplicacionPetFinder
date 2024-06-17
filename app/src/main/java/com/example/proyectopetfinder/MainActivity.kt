@@ -1,5 +1,6 @@
 package com.example.proyectopetfinder
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
+
+        binding.btnIniciarSesion.setOnClickListener {
+            val intent = Intent(this, IniciarSesionActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnCrearCuenta.setOnClickListener {
+            val intent = Intent(this, CrearCuentaActivity::class.java)
+            startActivity(intent)
+        }
+//        binding.btnIniciarSesion
 
     }
 }

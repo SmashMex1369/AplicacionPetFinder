@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="imagen_perfil">Imagen del perfil</string>
+    <string name="imagen_buscar">Icono de busqueda</string>
+    <string name="tv_perdidos">Perdidos</string>
+    <string name="tv_encontrados">Encontrados</string>
+    <string name="tv_ordenar_filtrar">Ordenar y filtrar</string>
+    <string name="fabtn_acciones">Boton flotante acciones</string>
+    <string name="img_back_arrow">Boton regresar</string>
+    <string name="descp_carusel">Imagenes de la mascota</string>
+    <string name="tv_fecha_extravio">Fecha de extravió:\n</string>
+    <string name="tv_raza">Raza:\n</string>
+    <string name="tv_sexo">Sexo:\n</string>
+    <string name="tv_edad">Edad:\n</string>
+    <string name="tv_ultima_vez">Visto por ultima vez en:\n</string>
+    <string name="btn_chat_grupal">Unirse al\nchat grupal</string>
+    <string name="btn_contactar_dueño">Contactar al\ndueño</string>
+    <string name="btn_iniciar_sesion">Ingresar</string>
+    <string name="check_recordar">Recordar\ncontraseña</string>
+    <string name="et_error">Complete el campo</string>
+    <string name="img_visibility_description">Icono de visibilidad</string>
+</resources>

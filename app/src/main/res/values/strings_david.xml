@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ed_hint_nombre_usuario">Nombre de usuario</string>
+    <string name="ed_hint_nombre_usuario">Nombre</string>
     <string name="ed_hint_contraseña">Contraseña</string>
     <string name="ed_hint_correo">Correo electrónico</string>
     <string name="ed_hint_celular">Número celular</string>

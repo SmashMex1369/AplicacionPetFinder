@@ -1,20 +1,6 @@
 <resources>
+
     <string name="app_name">PetFinder</string>
-    <string name="iniciar_sesion">Iniciar sesión</string>
-    <string name="crear_cuenta">Crear cuenta</string>
-    <string name="imagen_perfil">Imagen del perfil</string>
-    <string name="imagen_buscar">Icono de busqueda</string>
-    <string name="tv_perdidos">Perdidos</string>
-    <string name="tv_encontrados">Encontrados</string>
-    <string name="tv_ordenar_filtrar">Ordenar y filtrar</string>
-    <string name="fabtn_acciones">Boton flotante acciones</string>
-    <string name="ed_hint_nombre_usuario">Nombre de usuario</string>
-    <string name="ed_hint_contraseña">Contraseña</string>
-    <string name="ed_hint_correo">Correo electrónico</string>
-    <string name="ed_hint_celular">Número celular</string>
-    <string name="ed_hint_direccion">Dirección</string>
-    <string name="imagen_logo">App logo</string>
-    <string name="btn_registrar">Registrar</string>
-    <string name="tv_buscar">Buscar</string>
-    
+
+
 </resources>

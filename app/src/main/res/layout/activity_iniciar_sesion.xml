@@ -8,7 +8,7 @@
     android:background="@color/amarilloClaro"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".IniciarSesionActivity">
 
     <View
         android:id="@+id/vista_inicio"
@@ -44,12 +44,11 @@
         app:layout_constraintTop_toBottomOf="@id/vista_inicio" />
 
     <LinearLayout
-        android:id="@+id/linear_ingresar_datos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="95dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgv_logo">
@@ -61,28 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/itim"
-            android:text="@string/crear_cuenta"
+            android:text="@string/iniciar_sesion"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/et_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="10dp"
-            android:autofillHints="username"
-            android:background="@color/white"
-            android:fontFamily="@font/itim"
-            android:hint="@string/ed_hint_nombre_usuario"
-            android:inputType="text"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="5dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/amarilloMedio"
-            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/et_correo"
@@ -90,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:autofillHints="emailAddress"
             android:background="@color/white"
             android:fontFamily="@font/itim"
@@ -101,7 +82,6 @@
             android:textColor="@color/black"
             android:textColorHint="@color/amarilloMedio"
             android:textSize="24sp" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_contraseña_layout"
@@ -128,37 +108,28 @@
                 android:textSize="24sp"
                 android:background="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <EditText
-            android:id="@+id/et_celular"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="40dp"
             android:layout_marginTop="20dp"
-            android:autofillHints="phone"
-            android:background="@color/white"
+            android:textSize="22sp"
+            android:gravity="center"
             android:fontFamily="@font/itim"
-            android:hint="@string/ed_hint_celular"
-            android:inputType="phone"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="5dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/amarilloMedio"
-            android:textSize="24sp" />
+            android:layout_gravity="center_horizontal"
+            android:text="@string/check_recordar"/>
+
 
         <Button
-            android:id="@+id/btn_registrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/rojo"
             android:paddingHorizontal="40dp"
             android:paddingVertical="10dp"
             android:fontFamily="@font/itim"
             android:textColor="@color/white"
-            android:text="@string/btn_registrar"
+            android:text="@string/btn_iniciar_sesion"
             android:textAllCaps="false"
             android:textSize="22sp"
             android:textStyle="bold"
