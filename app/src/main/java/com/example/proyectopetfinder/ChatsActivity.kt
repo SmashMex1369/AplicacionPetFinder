@@ -57,7 +57,6 @@ class ChatsActivity : AppCompatActivity() {
         binding.lvChats.setOnItemClickListener { adapterView, view, i, l ->
             var usuario2 = chats.get(i)
             if(usuario2.endsWith("!!NUEVO MENSAJE¡¡")){
-                Toast.makeText(this@ChatsActivity,usuario2,Toast.LENGTH_SHORT).show()
                 usuario2 = usuario2.substring(0,usuario2.length-"!!NUEVO MENSAJE¡¡".length)
             }
             abrirConversacion(usuario2)
@@ -106,21 +105,21 @@ class ChatsActivity : AppCompatActivity() {
     }
 
     fun cargarNoMensajes(usuarios: List<String>): MutableList<Int> {
-        val noMensajes = mutableListOf<Int>()
+        val lista = mutableListOf<Int>()
         val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE)
         for (usuario in usuarios){
-            noMensajes.add(preferenciasUno.getInt(usuario.toString(),0) )
+            lista.add(preferenciasUno.getInt(usuario.toString(),0) )
         }
-        return noMensajes
+        return lista
     }
 
-    fun guardarNoMensajes(usuarios : List<String>, noMensajes : List<Int>){
+    fun guardarNoMensajes(lista : List<String>, lista2 : List<Int>){
         val archPreferenciasDefault = getPreferences(Context.MODE_PRIVATE)
         val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE) //Para llamar a otro prefernces que no sea el default
         with(preferenciasUno.edit()){//Te crea automaticamente una variable en la cual trabajas en los
             //parentesis. Sirve para no necesitar crear una variable y llamar sus datos con '.'
-            for (usuario in usuarios){
-                putInt(usuario,noMensajes.get( usuarios.indexOf(usuario) ))
+            for (usuario in lista){
+                putInt(usuario,lista2.get( lista.indexOf(usuario) ))
             }
             //.commit() sirve para el apply pero detiene el programa
             apply()
