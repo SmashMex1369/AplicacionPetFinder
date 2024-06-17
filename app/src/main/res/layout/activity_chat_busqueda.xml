@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/amarilloClaro"
-    tools:context=".ChatDuenioActivity">
+    tools:context=".ChatBusquedaActivity">
 
     <TextView
         android:id="@+id/tv_titulo"
@@ -19,7 +17,7 @@
         android:textSize="40sp"
         android:fontFamily="@font/itim"
         android:background="@color/rojo"
-        android:text="@string/contactar_dueño"
+        android:text="@string/chat_de_busqueda"
         />
 
     <LinearLayout
@@ -39,7 +37,7 @@
             android:textStyle="bold"
             android:textSize="35sp"
             android:fontFamily="@font/itim"
-            android:text="@string/dueño_de"
+            android:text="@string/buscando_a"
             />
 
         <ImageView

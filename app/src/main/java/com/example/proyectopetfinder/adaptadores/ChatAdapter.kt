@@ -10,6 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.poko.Chat
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 
 class ChatAdapter(val chats : List<Chat>) : RecyclerView.Adapter<ChatAdapter.ViewHolderChat>(){
 
@@ -37,6 +40,19 @@ class ChatAdapter(val chats : List<Chat>) : RecyclerView.Adapter<ChatAdapter.Vie
         holder.tvContenido.text = chat.Contenido
         if(chat.Origen == "Yo"){
             holder.llChat.setBackgroundColor(R.color.rojoOscuro)
+        }
+        if((chat.Imagen!= null)||(chat.Imagen!="")){
+            holder.ivImagen.setImageBitmap(stringToBitmap(chat.Imagen.toString()))
+        }
+    }
+
+    fun stringToBitmap(encodedString: String): Bitmap? {
+        return try {
+            val decodedString: ByteArray = Base64.decode(encodedString, Base64.DEFAULT)
+            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            null
         }
     }
 

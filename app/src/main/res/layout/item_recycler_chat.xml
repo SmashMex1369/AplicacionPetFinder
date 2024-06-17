@@ -25,7 +25,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/account"
                     />
                 <TextView
                     android:id="@+id/tv_usuario"
