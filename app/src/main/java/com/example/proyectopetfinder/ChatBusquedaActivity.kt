@@ -65,8 +65,7 @@ class ChatBusquedaActivity : AppCompatActivity() {
         }
 
         binding.btnImagenSeleccionada.setOnClickListener{
-            binding.llImagen.visibility = View.INVISIBLE
-            binding.btnImagen.visibility = View.VISIBLE
+            limpiarImagen()
         }
     }
 
@@ -144,8 +143,15 @@ class ChatBusquedaActivity : AppCompatActivity() {
         dataBase.child("Mensajes").child(idMensaje).child("Origen").setValue(chat.Origen)
         if(imagen != ""){
             dataBase.child("Mensajes").child(idMensaje).child("Imagen").setValue(imagen)
+            limpiarImagen()
         }
         binding.etMensaje.setText("")
+    }
+
+    fun limpiarImagen(){
+        imagen = ""
+        binding.llImagen.visibility = View.INVISIBLE
+        binding.btnImagen.visibility = View.VISIBLE
     }
 
     fun actualizarChat(mensajes: List<Chat>) {
