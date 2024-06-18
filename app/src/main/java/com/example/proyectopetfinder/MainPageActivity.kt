@@ -1,5 +1,6 @@
 package com.example.proyectopetfinder
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.example.proyectopetfinder.databinding.ActivityMainPageBinding
 
 class MainPageActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainPageBinding
+    private var usuario = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainPageBinding.inflate(layoutInflater)
@@ -21,5 +23,13 @@ class MainPageActivity : AppCompatActivity() {
         setContentView(view)
         window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
+
+        usuario = intent.getStringExtra("usuario")!!
+
+        binding.btnChat.setOnClickListener {
+            val intent = Intent(this,ChatsActivity::class.java)
+            intent.putExtra("usuario",usuario)
+            startActivity(intent)
+        }
     }
 }

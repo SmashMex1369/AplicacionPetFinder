@@ -48,7 +48,7 @@
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgv_logo">
@@ -120,6 +120,7 @@
 
 
         <Button
+            android:id="@+id/btn_iniciar_sesion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

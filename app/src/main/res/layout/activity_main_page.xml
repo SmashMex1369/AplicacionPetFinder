@@ -42,6 +42,17 @@
         android:textSize="50sp" />
 
     <ImageButton
+        android:id="@+id/btn_chat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@id/tv_petfinder"
+        app:layout_constraintBottom_toBottomOf="@id/view_header"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="6dp"
+        android:src="@drawable/message_outline"
+        />
+
+    <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="6dp"

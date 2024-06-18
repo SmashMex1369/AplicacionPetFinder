@@ -23,6 +23,18 @@
 
         </activity>
         <activity
+            android:name=".ChatDuenioActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name=".ChatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatBusquedaActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".BusquedaDePublicacionesActivity"
             android:exported="true">
 
