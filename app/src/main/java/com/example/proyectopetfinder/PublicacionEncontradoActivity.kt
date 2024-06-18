@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 import java.io.ByteArrayOutputStream
+import com.example.proyectopetfinder.utilidades.Internet.tieneInternet
+import com.example.proyectopetfinder.utilidades.Internet.perdioConexion
 
 class PublicacionEncontradoActivity : AppCompatActivity() {
 
@@ -116,7 +118,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
 
             if (validarCampos(descripcion)){
                 Toast.makeText(this,"Campos validos",Toast.LENGTH_LONG).show()
-                //subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
+                subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
             }
         }
 
@@ -138,19 +140,53 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         return bandera
     }
 
-    /*fun subirDatosAFirebase(tipo:String, tienePlaca:String, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String) {
-        database.child("PublicacionesEncontrado").child(key).child("Tipo").setValue(tipo)
-        database.child("PublicacionesEncontrado").child(key).child("Placa").setValue(tienePlaca)
-        database.child("PublicacionesEncontrado").child(key).child("Sexo").setValue(sexo)
-        database.child("PublicacionesEncontrado").child(key).child("Raza").setValue(raza)
-        database.child("PublicacionesEncontrado").child(key).child("Ubicacion").setValue(ubicacion)
-        database.child("PublicacionesEncontrado").child(key).child("Descripcion").setValue(descripcion)
+    fun subirDatosAFirebase(tipo:String, tienePlaca:String, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String) {
+        if (tieneInternet(this)){
+            var idEncontrado=0
 
+            database.child("IdExtraviado").get().addOnSuccessListener {dataSnapshot ->
+                if(dataSnapshot.exists()){
+                    idEncontrado = dataSnapshot.getValue().toString().toInt()
+                }
+                if (tieneInternet(this)){
+                    database.child("Publicacion"+idEncontrado).child("Tipo").setValue(tipo)
+                    database.child("Publicacion"+idEncontrado).child("Placa").setValue(tienePlaca)
+                    database.child("Publicacion"+idEncontrado).child("Sexo").setValue(sexo)
+                    database.child("Publicacion"+idEncontrado).child("Raza").setValue(raza)
+                    database.child("Publicacion"+idEncontrado).child("Ubicacion").setValue(ubicacion)
+                    database.child("Publicacion"+idEncontrado).child("Descripcion").setValue(descripcion)
+                    database.child("Publicacion"+idEncontrado).child("Foto").setValue(foto)
+                    database.child("IdEncontrado").setValue(idEncontrado+1)
+                    Toast.makeText(this,"Publicación exitosa",Toast.LENGTH_LONG).show()
+                    limpiarCampos()
+                    /*val intent = Intent(this, MainPageActivity::class.java)
+                    startActivity(intent)
+                    finish()*/
+                }else{
+                    perdioConexion(this)
+                    habilitarCampos()
+                }
 
-        database.child("PublicacionesEncontrado").child(key).child("Foto").setValue(foto)
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this,"Error al crear la cuenta, intente nuavemente más tarde",Toast.LENGTH_LONG).show()
 
-        Toast.makeText(this,"Publicación exitosa",Toast.LENGTH_LONG).show()
-    }*/
+            }
+        }
+    }
+
+    fun limpiarCampos(){
+        binding.etDescripcionEncontrado.setText("")
+    }
+    fun desabilitarCampos(){
+        binding.btnSubirImg.isEnabled=false
+        binding.btnPublicarEncontrado.isEnabled=false
+        binding.etDescripcionEncontrado.isEnabled=false
+    }
+    fun habilitarCampos(){
+        binding.btnSubirImg.isEnabled=false
+        binding.btnPublicarEncontrado.isEnabled=false
+        binding.etDescripcionEncontrado.isEnabled=false
+    }
     fun insertarImagen(view:View){
         var myfileintent= Intent(Intent.ACTION_GET_CONTENT)
         myfileintent.setType("image/*")
