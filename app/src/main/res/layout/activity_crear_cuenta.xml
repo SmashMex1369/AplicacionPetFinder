@@ -124,7 +124,8 @@
                 android:hint="@string/ed_hint_contraseña"
                 android:inputType="textPassword"
                 android:autofillHints="password"
-                android:paddingHorizontal="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="50dp"
                 android:textSize="24sp"
                 android:background="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
