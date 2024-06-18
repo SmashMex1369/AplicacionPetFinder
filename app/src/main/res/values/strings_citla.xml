@@ -2,15 +2,15 @@
 <resources>
     <string name="tv_extraviado">Extraviado</string>
     <string name="tv_tipo_mascota">Tipo de mascota</string>
-    <string name="tv_nombre_de_mascota">Nombre de la mascota</string>
-    <string name="ed_hint_nombre_mascota">Nombre de la mascota</string>
-    <string name="tv_raza">Raza</string>
-    <string name="tv_edad">Edad</string>
-    <string name="tv_sexo">Sexo</string>
-    <string name="tv_ubicacion">Ubicacion</string>
-    <string name="tv_descripcion">Descripcion</string>
-    <string name="et_descripcion">Descripción obligatoria</string>
-    <string name="et_id">Id obligatoria</string>
+    <string name="tv_nombre_mascota_extravio">Nombre de la mascota</string>
+    <string name="et_nombre_mascota_extravio">Nombre de la mascota</string>
+    <string name="tv_raza_extravio">Raza</string>
+    <string name="tv_edad_extravio">Edad</string>
+    <string name="tv_sexo_extravio">Sexo</string>
+    <string name="tv_ubicacion_extravio">Ubicacion</string>
+    <string name="tv_descripcion_extravio">Descripcion</string>
+    <string name="et_descripcion_extravio">Descripción obligatoria</string>
+    <string name="et_id_extravio">Id obligatoria</string>
     <string name="tv_sube_fotografias">Subir fotos</string>
     <string name="btn_publicar">Publicar</string>
 
@@ -21,8 +21,7 @@
     <string name="tv_region">Region</string>
     <string name="btn_buscar">Buscar</string>
 
-    <string name="et_id_extravio">Id obligatoria</string>
-    <string name="et_nombre_extravio">Nombre obligatorio</string>
-    <string name="et_descripcion_extravio">Descripción obligatoria</string>
+    <string name="et_id_encontrado">Id obligatoria</string>
+    <string name="et_descripcion_encontrado">Descripción obligatoria</string>
 
 </resources>

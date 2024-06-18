@@ -71,7 +71,7 @@
             android:fontFamily="@font/itim"
             android:textColor="@color/black"
             android:gravity="center_horizontal"
-            android:text="@string/tv_raza"/>
+            android:text="@string/tv_raza_publicacion"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:fontFamily="@font/itim"
             android:textColor="@color/black"
             android:gravity="center_horizontal"
-            android:text="@string/tv_sexo"/>
+            android:text="@string/tv_sexo_publicacion"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             android:fontFamily="@font/itim"
             android:textColor="@color/black"
             android:gravity="center_horizontal"
-            android:text="@string/tv_edad"/>
+            android:text="@string/tv_edad_publicacion"/>
     </LinearLayout>
 
     <TextView

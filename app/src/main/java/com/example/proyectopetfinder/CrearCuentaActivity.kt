@@ -58,18 +58,20 @@ class CrearCuentaActivity : AppCompatActivity() {
 
     fun agrearUsuarioFirebase(nombre:String, correo:String, contrasena:String, telefono:String){
         if (tieneInternet(this)){
+            //importante
             var idUsuario = 0
             database.child("IdUsuario").get().addOnSuccessListener {dataSnapshot ->
                 Toast.makeText(this,"Registranse, espere un momento ...",Toast.LENGTH_LONG).show()
                 if(dataSnapshot.exists()){
                     idUsuario = dataSnapshot.getValue().toString().toInt()
                 }
+                //
                 if (tieneInternet(this)){
                     database.child("Usuario"+idUsuario).child("Nombre").setValue(nombre)
                     database.child("Usuario"+idUsuario).child("Correo").setValue(correo)
                     database.child("Usuario"+idUsuario).child("Contraseña").setValue(contrasena)
                     database.child("Usuario"+idUsuario).child("Telefono").setValue(telefono)
-                    database.child("IdUsuario").setValue(idUsuario+1)
+                    database.child("IdUsuario").setValue(idUsuario+1) //importante
                     limpiarCampos()
                     Toast.makeText(this,"Cuenta registrada correctamente",Toast.LENGTH_LONG).show()
                     val intent = Intent(this, MainActivity::class.java)

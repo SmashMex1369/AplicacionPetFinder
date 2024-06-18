@@ -27,38 +27,6 @@
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginHorizontal="20dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="ID Encontrado:"/>
-
-        <EditText
-            android:id="@+id/et_id_encontrado"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="50dp"
-            android:background="@color/white"
-            android:paddingHorizontal="10dp"
-            android:textColor="@color/black"
-            android:hint="Escribe id..."
-            android:layout_marginTop="5dp"
-            />
-
-    </LinearLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

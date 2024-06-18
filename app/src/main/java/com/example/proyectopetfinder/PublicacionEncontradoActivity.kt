@@ -37,7 +37,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         val view= binding.root
         enableEdgeToEdge()
         setContentView(view)
-        database= Firebase.database.reference
+        database= Firebase.database.getReference("PublicacionesEncontrado")
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.rojo)
@@ -106,10 +106,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
 
 
         binding.btnPublicarEncontrado.setOnClickListener {
-            val id=binding.etIdEncontrado.text.toString()
-            //val descripcionValido= binding.etDescripcionEncontrado.text.toString()
             //datos de la base
-            val key=binding.etIdEncontrado.text.toString()
             val tipoMascota= binding.spinnerTipoEncontrado.selectedItem.toString()
             val tienePlaca= binding.spinnerTienePlaca.selectedItem.toString()
             val sexo= binding.spinnerSexoEncontrado.selectedItem.toString()
@@ -117,9 +114,9 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
             val ubicacion= binding.spinnerUbicacionEncontrado.selectedItem.toString()
             val descripcion= binding.etDescripcionEncontrado.text.toString()
 
-            if (validarCampos(id, descripcion)){
+            if (validarCampos(descripcion)){
                 Toast.makeText(this,"Campos validos",Toast.LENGTH_LONG).show()
-                subirDatosAFirebase(key, tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
+                //subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
             }
         }
 
@@ -127,20 +124,11 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
 
     }
 
-    fun validarCampos(id:String, descripcion: String):Boolean{
+    fun validarCampos(descripcion: String):Boolean{
 
         var bandera=true
-        /*if (id.isEmpty() && descripcion.isEmpty() && validaFotos){
-            binding.etDescripcionEncontrado.error= getString(R.string.et_descripcion)
-            binding.etIdEncontrado.error=getString(R.string.et_id)
-            Toast.makeText(this,"Llene los campos vacios",Toast.LENGTH_LONG).show()
-            bandera=false
-        }*/if(id.isEmpty()){
-            binding.etIdEncontrado.error=getString(R.string.et_id)
-            bandera=false
-        }
         if(descripcion.isEmpty()){
-            binding.etDescripcionEncontrado.error= getString(R.string.et_descripcion)
+            binding.etDescripcionEncontrado.error= getString(R.string.et_descripcion_encontrado)
             bandera=false
         }
         if(binding.viewFotosEncontrado.drawable==null){
@@ -150,7 +138,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         return bandera
     }
 
-    fun subirDatosAFirebase( key:String, tipo:String, tienePlaca:String, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String) {
+    /*fun subirDatosAFirebase(tipo:String, tienePlaca:String, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String) {
         database.child("PublicacionesEncontrado").child(key).child("Tipo").setValue(tipo)
         database.child("PublicacionesEncontrado").child(key).child("Placa").setValue(tienePlaca)
         database.child("PublicacionesEncontrado").child(key).child("Sexo").setValue(sexo)
@@ -162,7 +150,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         database.child("PublicacionesEncontrado").child(key).child("Foto").setValue(foto)
 
         Toast.makeText(this,"Publicación exitosa",Toast.LENGTH_LONG).show()
-    }
+    }*/
     fun insertarImagen(view:View){
         var myfileintent= Intent(Intent.ACTION_GET_CONTENT)
         myfileintent.setType("image/*")
