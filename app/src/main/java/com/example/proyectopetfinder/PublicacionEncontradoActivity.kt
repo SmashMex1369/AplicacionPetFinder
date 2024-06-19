@@ -117,13 +117,14 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
             val descripcion= binding.etDescripcionEncontrado.text.toString()
 
             if (validarCampos(descripcion)){
-                Toast.makeText(this,"Campos validos",Toast.LENGTH_LONG).show()
-                subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
+                if (tieneInternet(this)){
+                    desabilitarCampos()
+                    subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
+                }else {
+                    Toast.makeText(this, ContextCompat.getString(this, R.string.sin_conexion),Toast.LENGTH_LONG).show()
+                }
             }
         }
-
-
-
     }
 
     fun validarCampos(descripcion: String):Boolean{
@@ -144,7 +145,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         if (tieneInternet(this)){
             var idEncontrado=0
 
-            database.child("IdExtraviado").get().addOnSuccessListener {dataSnapshot ->
+            database.child("IdEncontrado").get().addOnSuccessListener {dataSnapshot ->
                 if(dataSnapshot.exists()){
                     idEncontrado = dataSnapshot.getValue().toString().toInt()
                 }
@@ -159,9 +160,9 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
                     database.child("IdEncontrado").setValue(idEncontrado+1)
                     Toast.makeText(this,"Publicación exitosa",Toast.LENGTH_LONG).show()
                     limpiarCampos()
-                    /*val intent = Intent(this, MainPageActivity::class.java)
+                    val intent = Intent(this, MainPageActivity::class.java)
                     startActivity(intent)
-                    finish()*/
+                    finish()
                 }else{
                     perdioConexion(this)
                     habilitarCampos()
@@ -176,6 +177,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
 
     fun limpiarCampos(){
         binding.etDescripcionEncontrado.setText("")
+        binding.viewFotosEncontrado.setImageDrawable(null)
     }
     fun desabilitarCampos(){
         binding.btnSubirImg.isEnabled=false
@@ -187,31 +189,55 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         binding.btnPublicarEncontrado.isEnabled=false
         binding.etDescripcionEncontrado.isEnabled=false
     }
-    fun insertarImagen(view:View){
-        var myfileintent= Intent(Intent.ACTION_GET_CONTENT)
-        myfileintent.setType("image/*")
+
+    fun insertarImagen(view: View) {
+        val myfileintent = Intent(Intent.ACTION_GET_CONTENT)
+        myfileintent.type = "image/*"
         PublicacionEncontradoActivity.launch(myfileintent)
     }
 
-    private val PublicacionEncontradoActivity= registerForActivityResult<Intent, ActivityResult>(
+    private val PublicacionEncontradoActivity = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ){result: ActivityResult ->
-        if (result.resultCode== RESULT_OK){
-            val uri= result.data!!.data
+    ) { result: ActivityResult ->
+        if (result.resultCode == RESULT_OK) {
+            val uri = result.data?.data
             try {
-                val inputStream= contentResolver.openInputStream(uri!!)
-                val myBitmap= BitmapFactory.decodeStream(inputStream)
-                val streamm= ByteArrayOutputStream()
-                myBitmap.compress(Bitmap.CompressFormat.PNG, 100, streamm)
-                val bytes= streamm.toByteArray()
-                foto= Base64.encodeToString(bytes,Base64.DEFAULT)
-                binding.viewFotosEncontrado.setImageBitmap(myBitmap)
+                val inputStream = contentResolver.openInputStream(uri!!)
+                val myBitmap = BitmapFactory.decodeStream(inputStream)
+
+                val resizedBitmap = redimensionarYComprimirImagen(myBitmap, 800, 800)
+                val stream = ByteArrayOutputStream()
+                resizedBitmap.compress(Bitmap.CompressFormat.PNG, 80, stream)
+                val bytes = stream.toByteArray()
+                foto = Base64.encodeToString(bytes, Base64.DEFAULT)
+
+                binding.viewFotosEncontrado.setImageBitmap(resizedBitmap)
                 inputStream!!.close()
-                Toast.makeText(this,"Imagen seleccionada",Toast.LENGTH_LONG).show()
-            }catch (ex:Exception){
-                Toast.makeText(this,ex.message.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Imagen seleccionada", Toast.LENGTH_LONG).show()
+            } catch (ex: Exception) {
+                Toast.makeText(this, ex.message.toString(), Toast.LENGTH_LONG).show()
             }
         }
     }
 
+    private fun redimensionarYComprimirImagen(bitmap: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
+        var width = bitmap.width
+        var height = bitmap.height
+
+        val aspectRatio = width.toFloat() / height.toFloat()
+
+        if (width > height) {
+            if (width > maxWidth) {
+                width = maxWidth
+                height = (width / aspectRatio).toInt()
+            }
+        } else {
+            if (height > maxHeight) {
+                height = maxHeight
+                width = (height * aspectRatio).toInt()
+            }
+        }
+
+        return Bitmap.createScaledBitmap(bitmap, width, height, true)
+    }
 }

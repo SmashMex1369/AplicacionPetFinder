@@ -60,4 +60,5 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     //Se añade aparte.
     implementation("com.google.firebase:firebase-database-ktx:20.0.0")
+
 }

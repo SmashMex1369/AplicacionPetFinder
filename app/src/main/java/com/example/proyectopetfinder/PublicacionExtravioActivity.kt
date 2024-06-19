@@ -29,16 +29,16 @@ import com.example.proyectopetfinder.utilidades.Internet.perdioConexion
 
 class PublicacionExtravioActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityPublicacionExtravioBinding
+    private lateinit var binding: ActivityPublicacionExtravioBinding
     private lateinit var database: DatabaseReference
-    var foto:String = ""
+    var foto: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityPublicacionExtravioBinding.inflate(layoutInflater)
-        val view= binding.root
+        binding = ActivityPublicacionExtravioBinding.inflate(layoutInflater)
+        val view = binding.root
         enableEdgeToEdge()
         setContentView(view)
-        database= Firebase.database.getReference("PublicacionesExtraviado")
+        database = Firebase.database.getReference("PublicacionesExtraviado")
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.rojo)
 
@@ -49,7 +49,13 @@ class PublicacionExtravioActivity : AppCompatActivity() {
 
         val spinnerRaza: Spinner = findViewById(binding.spinnerRazaExtravio.id)
         val listaRazasPerro =
-            arrayOf("Labrador", "Golden Retriever", "Bulldog", "Pastor Alemán", "Chihuahua") // Lista de razas de perro
+            arrayOf(
+                "Labrador",
+                "Golden Retriever",
+                "Bulldog",
+                "Pastor Alemán",
+                "Chihuahua"
+            ) // Lista de razas de perro
         val listaRazasGato = arrayOf("Siamés", "Maine Coon", "Persa")
 
         spinnerMascota.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -81,6 +87,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
                 }
                 spinnerRaza.adapter = adaptadorRaza
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
@@ -91,140 +98,169 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         numberPicker.wrapSelectorWheel = false
 
         val spinnerSexo: Spinner = findViewById(binding.spinnerSexoExtravio.id)
-        val listaSexo= arrayOf("Hembra", "Macho")
+        val listaSexo = arrayOf("Hembra", "Macho")
         val adaptadorSexo = ArrayAdapter<String>(this, R.layout.spinner, listaSexo)
         spinnerSexo.adapter = adaptadorSexo
 
         val spinnerUbicacion: Spinner = findViewById(binding.spinnerUbicacionExtravio.id)
-        val listaUbicacion= arrayOf("ArcoSur", "Tecnológico","Economía", "Centro")
+        val listaUbicacion = arrayOf("ArcoSur", "Tecnológico", "Economía", "Centro")
         val adaptadorUbicacion = ArrayAdapter<String>(this, R.layout.spinner, listaUbicacion)
         spinnerUbicacion.adapter = adaptadorUbicacion
 
-        binding.btnSubirImgExtravio.setOnClickListener{
+        binding.btnSubirImgExtravio.setOnClickListener {
             insertarImagen(view)
         }
 
         binding.btnPublicar.setOnClickListener {
             //datos
-            val tipo= binding.spinnerTipoExtravio.selectedItem.toString()
-            val nombre= binding.etNombreExtravio.text.toString()
-            val raza= binding.spinnerRazaExtravio.selectedItem.toString()
-            val edad= binding.numberPicker.value
-            val sexo= binding.spinnerSexoExtravio.selectedItem.toString()
-            val ubicacion=binding.spinnerUbicacionExtravio.selectedItem.toString()
-            val descripcion= binding.etDescripcion.text.toString()
+            val tipo = binding.spinnerTipoExtravio.selectedItem.toString()
+            val nombre = binding.etNombreExtravio.text.toString()
+            val raza = binding.spinnerRazaExtravio.selectedItem.toString()
+            val edad = binding.numberPicker.value
+            val sexo = binding.spinnerSexoExtravio.selectedItem.toString()
+            val ubicacion = binding.spinnerUbicacionExtravio.selectedItem.toString()
+            val descripcion = binding.etDescripcion.text.toString()
 
-            if (validarCampos(nombre, descripcion)){
-                if (tieneInternet(this)){
+            if (validarCampos(nombre, descripcion)) {
+                if (tieneInternet(this)) {
                     deshabilitarCampos()
-                    subirDatosAFirebase(tipo, nombre, raza, edad, sexo, ubicacion, descripcion,foto)
-                }else{
-                    Toast.makeText(this, ContextCompat.getString(this,R.string.sin_conexion),Toast.LENGTH_LONG).show()
+                    subirDatosAFirebase(tipo,nombre,raza,edad,sexo,ubicacion,descripcion,foto)
+                } else {
+                    Toast.makeText(this, ContextCompat.getString(this, R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
             }
-
         }
-
     }
 
-    fun validarCampos(nombre:String, descripcion: String):Boolean{
-        var bandera=true
-        if(nombre.isEmpty()){
-            binding.etNombreExtravio.error=getString(R.string.et_nombre_mascota_extravio)
-            bandera=false
+    fun validarCampos(nombre: String, descripcion: String): Boolean {
+        var bandera = true
+        if (nombre.isEmpty()) {
+            binding.etNombreExtravio.error = getString(R.string.et_nombre_mascota_extravio)
+            bandera = false
         }
-        if(descripcion.isEmpty()){
-            binding.etDescripcion.error= getString(R.string.et_descripcion_extravio)
-            bandera=false
+        if (descripcion.isEmpty()) {
+            binding.etDescripcion.error = getString(R.string.et_descripcion_extravio)
+            bandera = false
         }
-        if(binding.viewFotos.drawable==null){
-            Toast.makeText(this,"Suba foto de referencia", Toast.LENGTH_LONG).show()
-            bandera= false
+        if (binding.viewFotos.drawable == null) {
+            Toast.makeText(this, "Suba foto de referencia", Toast.LENGTH_LONG).show()
+            bandera = false
         }
         return bandera
     }
 
-    fun subirDatosAFirebase(tipo:String, nombre:String, raza:String, edad:Int, sexo:String, ubicacion: String, descripcion: String, foto:String) {
-        if (tieneInternet(this)){
-            var idExtraviado=0
+    fun subirDatosAFirebase(
+        tipo: String,
+        nombre: String,
+        raza: String,
+        edad: Int,
+        sexo: String,
+        ubicacion: String,
+        descripcion: String,
+        foto: String
+    ) {
+        if (tieneInternet(this)) {
+            var idExtraviado = 0
 
-            database.child("IdExtraviado").get().addOnSuccessListener {dataSnapshot ->
-                if(dataSnapshot.exists()){
+            database.child("IdExtraviado").get().addOnSuccessListener { dataSnapshot ->
+                if (dataSnapshot.exists()) {
                     idExtraviado = dataSnapshot.getValue().toString().toInt()
                 }
-                if (tieneInternet(this)){
-                    database.child("PublicacionExt"+idExtraviado).child("Tipo").setValue(tipo)
-                    database.child("PublicacionExt"+idExtraviado).child("Nombre").setValue(nombre)
-                    database.child("PublicacionExt"+idExtraviado).child("Raza").setValue(raza)
-                    database.child("PublicacionExt"+idExtraviado).child("Edad").setValue(edad)
-                    database.child("PublicacionExt"+idExtraviado).child("Sexo").setValue(sexo)
-                    database.child("PublicacionExt"+idExtraviado).child("UbicacionUltimaVezVisto").setValue(ubicacion)
-                    database.child("PublicacionExt"+idExtraviado).child("Descripcion").setValue(descripcion)
-                    database.child("PublicacionExt"+idExtraviado).child("Foto").setValue(foto)
-                    database.child("IdExtraviado").setValue(idExtraviado+1)
-                    Toast.makeText(this,"Publicación exitosa",Toast.LENGTH_LONG).show()
+                if (tieneInternet(this)) {
+                    database.child("PublicacionExt" + idExtraviado).child("Tipo").setValue(tipo)
+                    database.child("PublicacionExt" + idExtraviado).child("Nombre").setValue(nombre)
+                    database.child("PublicacionExt" + idExtraviado).child("Raza").setValue(raza)
+                    database.child("PublicacionExt" + idExtraviado).child("Edad").setValue(edad)
+                    database.child("PublicacionExt" + idExtraviado).child("Sexo").setValue(sexo)
+                    database.child("PublicacionExt" + idExtraviado).child("UbicacionUltimaVezVisto").setValue(ubicacion)
+                    database.child("PublicacionExt" + idExtraviado).child("Descripcion").setValue(descripcion)
+                    database.child("PublicacionExt" + idExtraviado).child("Foto").setValue(foto)
+                    database.child("IdExtraviado").setValue(idExtraviado + 1)
+                    Toast.makeText(this, "Publicación exitosa", Toast.LENGTH_LONG).show()
                     limpiarCampos()
-                    /*val intent = Intent(this, MainPageActivity::class.java)
+                    val intent = Intent(this, MainPageActivity::class.java)
                     startActivity(intent)
-                    finish()*/
-                }else{
+                    finish()
+                } else {
                     perdioConexion(this)
                     habilitarCampos()
                 }
 
             }.addOnFailureListener { exception ->
-                Toast.makeText(this,"Error al crear la cuenta, intente nuavemente más tarde",Toast.LENGTH_LONG).show()
-
+                Toast.makeText(this, "Error al crear la cuenta, intente nuavemente más tarde",Toast.LENGTH_LONG).show()
             }
-
         }
     }
 
-    fun limpiarCampos(){
+    fun limpiarCampos() {
         binding.etNombreExtravio.setText("")
         binding.etDescripcion.setText("")
+        binding.viewFotos.setImageDrawable(null)
     }
 
-    fun deshabilitarCampos(){
-        binding.btnSubirImgExtravio.isEnabled=false
-        binding.btnPublicar.isEnabled=false
-        binding.etNombreExtravio.isEnabled=false
-        binding.etDescripcion.isEnabled=false
+    fun deshabilitarCampos() {
+        binding.btnSubirImgExtravio.isEnabled = false
+        binding.btnPublicar.isEnabled = false
+        binding.etNombreExtravio.isEnabled = false
+        binding.etDescripcion.isEnabled = false
     }
 
-    fun habilitarCampos(){
-        binding.btnSubirImgExtravio.isEnabled=true
-        binding.btnPublicar.isEnabled=true
-        binding.etNombreExtravio.isEnabled=true
-        binding.etDescripcion.isEnabled=true
+    fun habilitarCampos() {
+        binding.btnSubirImgExtravio.isEnabled = true
+        binding.btnPublicar.isEnabled = true
+        binding.etNombreExtravio.isEnabled = true
+        binding.etDescripcion.isEnabled = true
     }
 
-    fun insertarImagen(view:View){
-        var myfileintent= Intent(Intent.ACTION_GET_CONTENT)
-        myfileintent.setType("image/*")
+    fun insertarImagen(view: View) {
+        val myfileintent = Intent(Intent.ACTION_GET_CONTENT)
+        myfileintent.type = "image/*"
         PublicacionExtravioActivity.launch(myfileintent)
     }
 
-    private val PublicacionExtravioActivity= registerForActivityResult<Intent, ActivityResult>(
+    private val PublicacionExtravioActivity = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ){result: ActivityResult ->
-        if (result.resultCode== RESULT_OK){
-            val uri= result.data!!.data
+    ) { result: ActivityResult ->
+        if (result.resultCode == RESULT_OK) {
+            val uri = result.data?.data
             try {
-                val inputStream= contentResolver.openInputStream(uri!!)
-                val myBitmap= BitmapFactory.decodeStream(inputStream)
-                val streamm= ByteArrayOutputStream()
-                myBitmap.compress(Bitmap.CompressFormat.PNG, 1, streamm)
-                val bytes= streamm.toByteArray()
-                foto= Base64.encodeToString(bytes,Base64.DEFAULT)
-                binding.viewFotos.setImageBitmap(myBitmap)
+                val inputStream = contentResolver.openInputStream(uri!!)
+                val myBitmap = BitmapFactory.decodeStream(inputStream)
+
+                val resizedBitmap = redimensionarYComprimirImagen(myBitmap, 800, 800)
+                val stream = ByteArrayOutputStream()
+                resizedBitmap.compress(Bitmap.CompressFormat.PNG, 80, stream)
+                val bytes = stream.toByteArray()
+                foto = Base64.encodeToString(bytes, Base64.DEFAULT)
+
+                binding.viewFotos.setImageBitmap(resizedBitmap)
                 inputStream!!.close()
-                Toast.makeText(this,"Imagen seleccionada",Toast.LENGTH_LONG).show()
-            }catch (ex:Exception){
-                Toast.makeText(this,ex.message.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Imagen seleccionada", Toast.LENGTH_LONG).show()
+            } catch (ex: Exception) {
+                Toast.makeText(this, ex.message.toString(), Toast.LENGTH_LONG).show()
             }
         }
     }
 
+    private fun redimensionarYComprimirImagen(bitmap: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
+        var width = bitmap.width
+        var height = bitmap.height
+
+        val aspectRatio = width.toFloat() / height.toFloat()
+
+        if (width > height) {
+            if (width > maxWidth) {
+                width = maxWidth
+                height = (width / aspectRatio).toInt()
+            }
+        } else {
+            if (height > maxHeight) {
+                height = maxHeight
+                width = (height * aspectRatio).toInt()
+            }
+        }
+
+        return Bitmap.createScaledBitmap(bitmap, width, height, true)
+    }
 
 }
