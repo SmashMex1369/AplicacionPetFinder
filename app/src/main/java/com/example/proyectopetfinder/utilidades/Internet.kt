@@ -18,7 +18,7 @@ object Internet {
     }
 
     fun perdioConexion(context: Context){
-        Toast.makeText(context, ContextCompat.getString(context, R.string.sin_conexion), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, ContextCompat.getString(context, R.string.conexion_perdida), Toast.LENGTH_LONG).show()
 
     }
 }

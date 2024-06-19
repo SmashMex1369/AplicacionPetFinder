@@ -50,6 +50,8 @@ class CrearCuentaActivity : AppCompatActivity() {
                     Toast.makeText(this, ContextCompat.getString(this,R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
 
+            }else{
+                Toast.makeText(this,"Rellene los campos faltantes",Toast.LENGTH_LONG).show()
             }
 
         }
@@ -88,6 +90,7 @@ class CrearCuentaActivity : AppCompatActivity() {
             }
         }else{
             perdioConexion(this)
+            habilitarCampos()
         }
 
 

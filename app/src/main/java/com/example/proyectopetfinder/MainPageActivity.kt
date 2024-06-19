@@ -14,9 +14,10 @@ import com.example.proyectopetfinder.databinding.ActivityMainPageBinding
 
 class MainPageActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainPageBinding
-    private var usuario = ""
+    private var nombre = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        nombre = intent.getStringExtra("Nombre")!!
         binding = ActivityMainPageBinding.inflate(layoutInflater)
         val view = binding.root
         enableEdgeToEdge()
@@ -24,11 +25,11 @@ class MainPageActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
-        usuario = intent.getStringExtra("usuario")!!
+
 
         binding.btnChat.setOnClickListener {
             val intent = Intent(this,ChatsActivity::class.java)
-            intent.putExtra("usuario",usuario)
+            intent.putExtra("Nombre",nombre)
             startActivity(intent)
         }
     }

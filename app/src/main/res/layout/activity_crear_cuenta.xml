@@ -73,7 +73,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="10dp"
-            android:autofillHints="username"
+            android:autofillHints="name"
             android:background="@color/white"
             android:fontFamily="@font/itim"
             android:hint="@string/ed_hint_nombre_usuario"
