@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proyectopetfinder.databinding.ActivityPublicacionExtravioBinding
+import com.example.proyectopetfinder.poko.Usuario
 import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
@@ -32,10 +33,12 @@ class PublicacionExtravioActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPublicacionExtravioBinding
     private lateinit var database: DatabaseReference
     var foto: String = ""
+    private var idUsuario=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPublicacionExtravioBinding.inflate(layoutInflater)
         val view = binding.root
+        idUsuario=intent.getIntExtra("Id",0)
         enableEdgeToEdge()
         setContentView(view)
         database = Firebase.database.getReference("PublicacionesExtraviado")
@@ -124,7 +127,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             if (validarCampos(nombre, descripcion)) {
                 if (tieneInternet(this)) {
                     deshabilitarCampos()
-                    subirDatosAFirebase(tipo,nombre,raza,edad,sexo,ubicacion,descripcion,foto)
+                    subirDatosAFirebase(tipo,nombre,raza,edad,sexo,ubicacion,descripcion,foto, idUsuario)
                 } else {
                     Toast.makeText(this, ContextCompat.getString(this, R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
@@ -157,7 +160,8 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         sexo: String,
         ubicacion: String,
         descripcion: String,
-        foto: String
+        foto: String,
+        idUsuario: Int
     ) {
         if (tieneInternet(this)) {
             var idExtraviado = 0
@@ -175,6 +179,8 @@ class PublicacionExtravioActivity : AppCompatActivity() {
                     database.child("PublicacionExt" + idExtraviado).child("UbicacionUltimaVezVisto").setValue(ubicacion)
                     database.child("PublicacionExt" + idExtraviado).child("Descripcion").setValue(descripcion)
                     database.child("PublicacionExt" + idExtraviado).child("Foto").setValue(foto)
+                    database.child("PublicacionExt" + idExtraviado).child("IdUsuario").setValue(idUsuario)
+                    database.child("PublicacionExt" + idExtraviado).child("IdExtraviado").setValue(idExtraviado)
                     database.child("IdExtraviado").setValue(idExtraviado + 1)
                     Toast.makeText(this, "Publicación exitosa", Toast.LENGTH_LONG).show()
                     limpiarCampos()

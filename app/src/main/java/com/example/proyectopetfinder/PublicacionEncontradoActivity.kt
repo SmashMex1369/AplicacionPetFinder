@@ -33,10 +33,13 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var spinnerMascota: Spinner
     var foto:String = ""
+    private var idUsuario=0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityPublicacionEncontradoBinding.inflate(layoutInflater)
         val view= binding.root
+        idUsuario=intent.getIntExtra("Id",0)
         enableEdgeToEdge()
         setContentView(view)
         database= Firebase.database.getReference("PublicacionesEncontrado")
@@ -110,7 +113,12 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         binding.btnPublicarEncontrado.setOnClickListener {
             //datos de la base
             val tipoMascota= binding.spinnerTipoEncontrado.selectedItem.toString()
-            val tienePlaca= binding.spinnerTienePlaca.selectedItem.toString()
+            var tienePlaca= false
+            if (binding.spinnerTienePlaca.selectedItem.toString()=="Si"){
+                tienePlaca=true
+            }else{
+                tienePlaca=false
+            }
             val sexo= binding.spinnerSexoEncontrado.selectedItem.toString()
             val raza= binding.spinnerRazaEncontrado.selectedItem.toString()
             val ubicacion= binding.spinnerUbicacionEncontrado.selectedItem.toString()
@@ -119,7 +127,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
             if (validarCampos(descripcion)){
                 if (tieneInternet(this)){
                     desabilitarCampos()
-                    subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto)
+                    subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto,idUsuario)
                 }else {
                     Toast.makeText(this, ContextCompat.getString(this, R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
@@ -141,7 +149,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         return bandera
     }
 
-    fun subirDatosAFirebase(tipo:String, tienePlaca:String, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String) {
+    fun subirDatosAFirebase(tipo:String, tienePlaca:Boolean, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String, idUsuario: Int) {
         if (tieneInternet(this)){
             var idEncontrado=0
 
@@ -157,6 +165,8 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
                     database.child("Publicacion"+idEncontrado).child("Ubicacion").setValue(ubicacion)
                     database.child("Publicacion"+idEncontrado).child("Descripcion").setValue(descripcion)
                     database.child("Publicacion"+idEncontrado).child("Foto").setValue(foto)
+                    database.child("Publicacion"+idEncontrado).child("IdUsuario").setValue(idUsuario)
+                    database.child("Publicacion"+idEncontrado).child("IdEncontrado").setValue(idEncontrado)
                     database.child("IdEncontrado").setValue(idEncontrado+1)
                     Toast.makeText(this,"Publicación exitosa",Toast.LENGTH_LONG).show()
                     limpiarCampos()
