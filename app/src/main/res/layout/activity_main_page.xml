@@ -45,21 +45,26 @@
         android:id="@+id/btn_chat"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_petfinder"
+        app:layout_constraintEnd_toStartOf="@id/img_buscar"
         app:layout_constraintBottom_toBottomOf="@id/view_header"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="6dp"
         android:src="@drawable/message_outline"
-        />
+        android:contentDescription="@string/imgb_chat" />
 
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="6dp"
+    <ImageView
+        android:id="@+id/img_buscar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
         android:layout_marginEnd="9dp"
+        android:src="@drawable/lupa"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/view_header"
-        android:contentDescription="@string/imagen_buscar" />
+        android:contentDescription="@string/imagen_buscar"
+        android:focusable="true" />
 
 
 
@@ -127,7 +132,7 @@
         android:id="@+id/tv_ordenar_filtrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:textSize="20sp"
         android:fontFamily="@font/itim"
@@ -138,37 +143,78 @@
         android:textColor="@color/black"
         app:drawableEndCompat="@drawable/filter_list" />
 
-    <ScrollView
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/publicaciones_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/tv_ordenar_filtrar"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </ScrollView>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_publicaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        app:fabSize="auto"
+        android:text="@string/efab_publicacion"
+        app:iconGravity="end"
+        android:fontFamily="@font/itim"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:backgroundTint="@color/naranjaMedio"
-        android:src="@drawable/priority_high"
+        app:icon="@drawable/priority_high"
+        app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/fabtn_acciones"/>
-
-    <!--<View
-        android:id="@+id/view_navegacion"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/rojo"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        android:layout_alignParentBottom="true"/>-->
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_encontrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:src="@drawable/found"
+        android:backgroundTint="@color/rojo"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@id/fab_publicaciones"
+        app:layout_constraintEnd_toEndOf="@id/fab_publicaciones"
+        android:contentDescription="@string/fab_encontrado" />
+    <TextView
+        android:id="@+id/tv_fab_encontrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_encontrado"
+        android:layout_marginEnd="7dp"
+        android:fontFamily="@font/itim"
+        android:paddingHorizontal="3dp"
+        android:textSize="17sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_encontrado"
+        app:layout_constraintEnd_toStartOf="@+id/fab_encontrado"
+        app:layout_constraintTop_toTopOf="@+id/fab_encontrado"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_perdido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:src="@drawable/lost"
+        android:backgroundTint="@color/rojo"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@id/fab_encontrado"
+        app:layout_constraintEnd_toEndOf="@id/fab_encontrado"
+        android:contentDescription="@string/fab_perdido" />
+    <TextView
+        android:id="@+id/tv_fab_perdido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_perdido"
+        android:layout_marginEnd="7dp"
+        android:fontFamily="@font/itim"
+        android:paddingHorizontal="3dp"
+        android:textSize="17sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_perdido"
+        app:layout_constraintEnd_toStartOf="@+id/fab_perdido"
+        app:layout_constraintTop_toTopOf="@+id/fab_perdido"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

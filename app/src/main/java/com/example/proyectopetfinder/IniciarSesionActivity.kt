@@ -26,6 +26,7 @@ import com.google.firebase.ktx.Firebase
 class IniciarSesionActivity : AppCompatActivity() {
     private lateinit var binding : ActivityIniciarSesionBinding
     private lateinit var database: DatabaseReference
+    var toast : Toast? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIniciarSesionBinding.inflate(layoutInflater)
@@ -41,7 +42,8 @@ class IniciarSesionActivity : AppCompatActivity() {
 
             if(validarCampos()){
                 if (tieneInternet(this)){
-                    Toast.makeText(this,"Iniciando sesión, por favor espere ...",Toast.LENGTH_LONG).show()
+                    toast = Toast.makeText(this,"Iniciando sesión, por favor espere ...",Toast.LENGTH_SHORT)
+                    toast?.show()
                     deshabilitarCampos()
                     val correo = binding.etCorreo.text.toString()
                     val contrasena = binding.etContraseA.text.toString()
@@ -66,6 +68,7 @@ class IniciarSesionActivity : AppCompatActivity() {
                     var correoBase : String
                     var contrasenaBase =""
                     var nombreBase = ""
+                    var idBase = 0
                     for(usuario in snapshot.children){
                         if (tieneInternet(context)){
                             correoBase = usuario.child("Correo").value.toString()
@@ -73,6 +76,7 @@ class IniciarSesionActivity : AppCompatActivity() {
                                 encontrado = true
                                 contrasenaBase=usuario.child("Contraseña").value.toString()
                                 nombreBase=usuario.child("Nombre").value.toString()
+                                idBase=usuario.child("Id").value.toString().toInt()
                                 break
                             }
                         }else{
@@ -93,21 +97,24 @@ class IniciarSesionActivity : AppCompatActivity() {
                                     }
                                     limpiarCampos()
                                     habilitarCampos()
+                                    toast?.cancel()
                                     Toast.makeText(context,"Bienvenido a la aplicación $nombreBase",Toast.LENGTH_LONG).show()
                                     val intent = Intent(context, MainPageActivity::class.java)
                                     intent.putExtra("Nombre",nombreBase)
+                                    intent.putExtra("Id",idBase)
                                     startActivity(intent)
                                     finish()
                                 }else{
                                     perdioConexion(context)
                                     habilitarCampos()
                                 }
-
                             }else{
                                 Toast.makeText(context,"Contraseña incorrectos. Intente nuevamente",Toast.LENGTH_LONG).show()
+                                habilitarCampos()
                             }
                         }else{
                             Toast.makeText(context,"Cuenta no registrada, considere crear una cuenta",Toast.LENGTH_LONG).show()
+                            habilitarCampos()
                         }
                     }
                 }

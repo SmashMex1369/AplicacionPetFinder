@@ -13,4 +13,9 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="RoundCorners">
+        <item name="cornerRadius">50dp</item>
+        <item name="backgroundColor">@color/naranjaClaro</item>
+    </style>
+
 </resources>

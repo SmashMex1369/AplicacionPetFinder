@@ -25,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 class CrearCuentaActivity : AppCompatActivity() {
     private lateinit var binding : ActivityCrearCuentaBinding
     private lateinit var database : DatabaseReference
+    var toast : Toast? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCrearCuentaBinding.inflate(layoutInflater)
@@ -37,57 +38,77 @@ class CrearCuentaActivity : AppCompatActivity() {
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
         binding.btnRegistrar.setOnClickListener {
-            
             if (validarCampos()){
                 if (tieneInternet(this)){
+                    toast = Toast.makeText(this,"Registranse, espere un momento ...",Toast.LENGTH_LONG)
+                    toast?.show()
                     deshabilitarCampos()
                     val nombre=binding.etUsuario.text.toString()
                     val correo=binding.etCorreo.text.toString()
                     val contrasena=binding.etContraseA.text.toString()
                     val telefono=binding.etCelular.text.toString()
-                    agrearUsuarioFirebase(nombre,correo,contrasena,telefono)
+                    agrearUsuarioFirebase(nombre,correo,contrasena,telefono, this)
                 }else{
                     Toast.makeText(this, ContextCompat.getString(this,R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
-
             }else{
                 Toast.makeText(this,"Rellene los campos faltantes",Toast.LENGTH_LONG).show()
             }
-
         }
-
     }
 
-    fun agrearUsuarioFirebase(nombre:String, correo:String, contrasena:String, telefono:String){
+    fun agrearUsuarioFirebase(nombre:String, correo:String, contrasena:String, telefono:String,context:Context){
         if (tieneInternet(this)){
-            //importante
-            var idUsuario = 0
-            database.child("IdUsuario").get().addOnSuccessListener {dataSnapshot ->
-                Toast.makeText(this,"Registranse, espere un momento ...",Toast.LENGTH_LONG).show()
-                if(dataSnapshot.exists()){
-                    idUsuario = dataSnapshot.getValue().toString().toInt()
-                }
-                //
-                if (tieneInternet(this)){
-                    database.child("Usuario"+idUsuario).child("Nombre").setValue(nombre)
-                    database.child("Usuario"+idUsuario).child("Correo").setValue(correo)
-                    database.child("Usuario"+idUsuario).child("Contraseña").setValue(contrasena)
-                    database.child("Usuario"+idUsuario).child("Telefono").setValue(telefono)
-                    database.child("IdUsuario").setValue(idUsuario+1) //importante
-                    limpiarCampos()
-                    Toast.makeText(this,"Cuenta registrada correctamente",Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }else{
-                    perdioConexion(this)
-                    habilitarCampos()
+            database.addListenerForSingleValueEvent(object:ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var encontrado = false
+                    for (usuario in snapshot.children){
+                        if(correo==usuario.child("Correo").value){
+                            encontrado=true
+                            break
+                        }
+                    }
+                    if(!encontrado){
+                        var idUsuario = 0
+                        database.child("IdUsuario").get().addOnSuccessListener {dataSnapshot ->
+                            if(dataSnapshot.exists()){
+                                idUsuario = dataSnapshot.getValue().toString().toInt()
+                            }
+
+                            if (tieneInternet(context)){
+                                database.child("Usuario"+idUsuario).child("Nombre").setValue(nombre)
+                                database.child("Usuario"+idUsuario).child("Correo").setValue(correo)
+                                database.child("Usuario"+idUsuario).child("Contraseña").setValue(contrasena)
+                                database.child("Usuario"+idUsuario).child("Telefono").setValue(telefono)
+                                database.child("Usuario"+idUsuario).child("Id").setValue(idUsuario)
+                                database.child("IdUsuario").setValue(idUsuario+1)
+                                limpiarCampos()
+                                toast?.cancel()
+                                Toast.makeText(context,"Cuenta registrada correctamente",Toast.LENGTH_LONG).show()
+                                val intent = Intent(context, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }else{
+                                perdioConexion(context)
+                                habilitarCampos()
+                            }
+
+                        }.addOnFailureListener { exception ->
+                            Toast.makeText(context,"Error al crear la cuenta, intente nuavemente más tarde",Toast.LENGTH_LONG).show()
+
+                        }
+                    }else{
+                        Toast.makeText(context,"Correo ya registrado, intente con uno diferente",Toast.LENGTH_LONG).show()
+                        habilitarCampos()
+                    }
                 }
 
-            }.addOnFailureListener { exception ->
-                Toast.makeText(this,"Error al crear la cuenta, intente nuavemente más tarde",Toast.LENGTH_LONG).show()
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(context,"Error al acceder a la base datos",Toast.LENGTH_LONG).show()
+                }
 
-            }
+            })
+
         }else{
             perdioConexion(this)
             habilitarCampos()

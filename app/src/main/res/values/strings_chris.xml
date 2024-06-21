@@ -23,4 +23,11 @@
     <string name="img_visibility_description">Icono de visibilidad</string>
     <string name="sin_conexion">Sin conexión a Internet. Asegurese de estar conectado.</string>
     <string name="conexion_perdida">Se ha perdido la conexión, intente nuevamente más tarde"</string>
+    <string name="imgview_publicacion">Imagen de mascota</string>
+    <string name="imgb_chat">Icono de chat</string>
+    <string name="efab_publicacion">Nueva publicación</string>
+    <string name="fab_perdido">Boton de perdido</string>
+    <string name="fab_encontrado">Boton de encontrado</string>
+    <string name="tv_perdido">Perdido</string>
+    <string name="tv_encontrado">Encontrado</string>
 </resources>
