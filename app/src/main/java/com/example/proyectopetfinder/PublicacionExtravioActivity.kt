@@ -122,12 +122,13 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             val edad = binding.numberPicker.value
             val sexo = binding.spinnerSexoExtravio.selectedItem.toString()
             val ubicacion = binding.spinnerUbicacionExtravio.selectedItem.toString()
+            val fecha= obtenerFecha()
             val descripcion = binding.etDescripcion.text.toString()
-
+            Toast.makeText(this, edad.toString(), Toast.LENGTH_SHORT).show()
             if (validarCampos(nombre, descripcion)) {
                 if (tieneInternet(this)) {
                     deshabilitarCampos()
-                    subirDatosAFirebase(tipo,nombre,raza,edad,sexo,ubicacion,descripcion,foto, idUsuario)
+                    subirDatosAFirebase(tipo,nombre,raza,edad,sexo,ubicacion,fecha, descripcion,foto, idUsuario)
                 } else {
                     Toast.makeText(this, ContextCompat.getString(this, R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
@@ -159,6 +160,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         edad: Int,
         sexo: String,
         ubicacion: String,
+        fecha: String,
         descripcion: String,
         foto: String,
         idUsuario: Int
@@ -177,6 +179,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
                     database.child("PublicacionExt" + idExtraviado).child("Edad").setValue(edad)
                     database.child("PublicacionExt" + idExtraviado).child("Sexo").setValue(sexo)
                     database.child("PublicacionExt" + idExtraviado).child("UbicacionUltimaVezVisto").setValue(ubicacion)
+                    database.child("PublicacionExt" + idExtraviado).child("Fecha de extraviado").setValue(fecha)
                     database.child("PublicacionExt" + idExtraviado).child("Descripcion").setValue(descripcion)
                     database.child("PublicacionExt" + idExtraviado).child("Foto").setValue(foto)
                     database.child("PublicacionExt" + idExtraviado).child("IdUsuario").setValue(idUsuario)
@@ -216,6 +219,15 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         binding.btnPublicar.isEnabled = true
         binding.etNombreExtravio.isEnabled = true
         binding.etDescripcion.isEnabled = true
+    }
+
+    fun obtenerFecha():String{
+        val fecha: String
+        val dia= binding.datePicker.dayOfMonth
+        val mes= (binding.datePicker.month+1)
+        val anio= binding.datePicker.year
+        fecha= "${dia}/${mes}/ ${anio}"
+        return fecha
     }
 
     fun insertarImagen(view: View) {
