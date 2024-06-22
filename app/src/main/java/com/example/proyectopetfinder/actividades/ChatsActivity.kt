@@ -38,7 +38,7 @@ class ChatsActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
-        usuario = intent.getStringExtra("usuario").toString()
+        usuario = intent.getStringExtra("Nombre").toString()
         cargarDatosFirebase()
 
     }
