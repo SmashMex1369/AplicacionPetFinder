@@ -4,25 +4,28 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_extravio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:clickable="true"
         android:layout_marginBottom="25dp"
         app:cardCornerRadius="30dp"
         android:backgroundTint="@color/naranjaClaro"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:focusable="true">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/imgv_publicacion"
+                android:id="@+id/imgv_publicacion_extravio"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:src="@drawable/lupa"
                 app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="@string/imgview_publicacion" />
             <TextView
-                android:id="@+id/tv_nombre_recycler"
+                android:id="@+id/tv_nombre_extravio_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Nombre"
@@ -33,10 +36,10 @@
                 android:paddingHorizontal="5dp"
                 android:gravity="center_horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_fecha_recycler"
-                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion"/>
+                app:layout_constraintEnd_toStartOf="@id/tv_fecha_extravio_recycler"
+                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion_extravio"/>
             <TextView
-                android:id="@+id/tv_fecha_recycler"
+                android:id="@+id/tv_fecha_extravio_recycler"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
@@ -44,36 +47,36 @@
                 android:textColor="@color/black"
                 android:text="Fecha"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion"
-                app:layout_constraintStart_toEndOf="@id/tv_nombre_recycler"
-                app:layout_constraintBottom_toTopOf="@id/tv_raza_recycler"
+                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion_extravio"
+                app:layout_constraintStart_toEndOf="@id/tv_nombre_extravio_recycler"
+                app:layout_constraintBottom_toTopOf="@id/tv_sexo_extravio_recycler"
                 app:layout_constraintEnd_toEndOf="parent"/>
             <TextView
-                android:id="@+id/tv_sexo_recycler"
+                android:id="@+id/tv_tipo_extravio_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:fontFamily="@font/itim"
-                android:text="Sexo"
+                android:text="Tipo"
                 android:textColor="@color/black"
                 android:paddingVertical="2dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_nombre_recycler"
-                app:layout_constraintEnd_toStartOf="@id/tv_raza_recycler"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_nombre_extravio_recycler"
+                app:layout_constraintEnd_toStartOf="@id/tv_sexo_extravio_recycler"/>
             <TextView
-                android:id="@+id/tv_raza_recycler"
+                android:id="@+id/tv_sexo_extravio_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:paddingVertical="2dp"
-                android:text="Raza"
+                android:text="Sexo"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:fontFamily="@font/itim"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_sexo_recycler"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nombre_recycler"/>
+                app:layout_constraintStart_toEndOf="@id/tv_tipo_extravio_recycler"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nombre_extravio_recycler"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

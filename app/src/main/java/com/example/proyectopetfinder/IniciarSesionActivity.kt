@@ -68,7 +68,7 @@ class IniciarSesionActivity : AppCompatActivity() {
                     var correoBase : String
                     var contrasenaBase =""
                     var nombreBase = ""
-                    var idBase = 0
+                    var idBase:Long = 0
                     for(usuario in snapshot.children){
                         if (tieneInternet(context)){
                             correoBase = usuario.child("Correo").value.toString()
@@ -76,7 +76,7 @@ class IniciarSesionActivity : AppCompatActivity() {
                                 encontrado = true
                                 contrasenaBase=usuario.child("Contraseña").value.toString()
                                 nombreBase=usuario.child("Nombre").value.toString()
-                                idBase=usuario.child("Id").value.toString().toInt()
+                                idBase=usuario.child("Id").value.toString().toLong()
                                 break
                             }
                         }else{

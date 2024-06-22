@@ -78,6 +78,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_perdidos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -86,8 +87,11 @@
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="36sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:clickable="true"
+            android:focusable="true"/>
         <TextView
+            android:id="@+id/tv_encontrados"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -109,12 +113,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <View
+                android:id="@+id/view_perdidos"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
                 android:layout_weight="1"
                 android:layout_gravity="bottom"
                 android:background="@color/black"/>
             <View
+                android:id="@+id/view_encontrados"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
                 android:layout_weight="1"

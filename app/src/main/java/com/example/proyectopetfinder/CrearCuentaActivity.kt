@@ -98,6 +98,7 @@ class CrearCuentaActivity : AppCompatActivity() {
 
                         }
                     }else{
+                        toast?.cancel()
                         Toast.makeText(context,"Correo ya registrado, intente con uno diferente",Toast.LENGTH_LONG).show()
                         habilitarCampos()
                     }

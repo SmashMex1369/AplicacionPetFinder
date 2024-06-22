@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CrearCuentaActivity::class.java)
             startActivity(intent)
         }
-//        binding.btnIniciarSesion
 
     }
 }

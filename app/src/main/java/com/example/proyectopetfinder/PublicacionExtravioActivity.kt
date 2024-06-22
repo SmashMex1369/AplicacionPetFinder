@@ -124,7 +124,6 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             val ubicacion = binding.spinnerUbicacionExtravio.selectedItem.toString()
             val fecha= obtenerFecha()
             val descripcion = binding.etDescripcion.text.toString()
-            Toast.makeText(this, edad.toString(), Toast.LENGTH_SHORT).show()
             if (validarCampos(nombre, descripcion)) {
                 if (tieneInternet(this)) {
                     deshabilitarCampos()
@@ -171,20 +170,21 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             database.child("IdExtraviado").get().addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot.exists()) {
                     idExtraviado = dataSnapshot.getValue().toString().toLong()
+
                 }
                 if (tieneInternet(this)) {
                     database.child("PublicacionExt" + idExtraviado).child("Tipo").setValue(tipo)
                     database.child("PublicacionExt" + idExtraviado).child("Nombre").setValue(nombre)
                     database.child("PublicacionExt" + idExtraviado).child("Raza").setValue(raza)
-                    database.child("PublicacionExt" + idExtraviado).child("Edad").setValue(edad)
+                    database.child("PublicacionExt" + idExtraviado).child("Edad").setValue(edad.toInt())
                     database.child("PublicacionExt" + idExtraviado).child("Sexo").setValue(sexo)
                     database.child("PublicacionExt" + idExtraviado).child("UbicacionUltimaVezVisto").setValue(ubicacion)
                     database.child("PublicacionExt" + idExtraviado).child("Fecha de extraviado").setValue(fecha)
                     database.child("PublicacionExt" + idExtraviado).child("Descripcion").setValue(descripcion)
                     database.child("PublicacionExt" + idExtraviado).child("Foto").setValue(foto)
-                    database.child("PublicacionExt" + idExtraviado).child("IdUsuario").setValue(idUsuario)
-                    database.child("PublicacionExt" + idExtraviado).child("IdExtraviado").setValue(idExtraviado)
-                    database.child("IdExtraviado").setValue(idExtraviado + 1)
+                    database.child("PublicacionExt" + idExtraviado).child("IdUsuario").setValue(idUsuario.toInt())
+                    database.child("PublicacionExt" + idExtraviado).child("IdExtraviado").setValue(idExtraviado.toInt())
+                    database.child("IdExtraviado").setValue(idExtraviado.toInt() + 1)
                     Toast.makeText(this, "Publicación exitosa", Toast.LENGTH_LONG).show()
                     limpiarCampos()
                     val intent = Intent(this, MainPageActivity::class.java)
