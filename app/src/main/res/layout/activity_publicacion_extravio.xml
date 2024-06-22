@@ -27,26 +27,62 @@
             />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_gravity="center"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Tipo de mascota:"/>
 
-    <Spinner
-        android:id="@+id/spinner_tipo_extravio"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginHorizontal="70dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/black"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:text="Raza:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Spinner
+            android:id="@+id/spinner_tipo_extravio"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="8dp"
+            tools:ignore="Suspicious0dp" />
+
+        <Spinner
+            android:id="@+id/spinner_raza_extravio"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:backgroundTint="@color/black"/>
+    </LinearLayout>
+
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -67,25 +103,6 @@
         android:textColor="@color/black"
         android:hint="Escribe aquí..."
         android:layout_marginTop="3dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:text="Raza:"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spinner_raza_extravio"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginHorizontal="70dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -160,9 +177,9 @@
         android:id="@+id/spinner_ubicacion_extravio"
         android:layout_width="0dp"
         android:layout_height="42dp"
+        android:layout_marginStart="8dp"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:backgroundTint="@color/black"/>
+        android:layout_weight="1" />
 
         <DatePicker
             android:id="@+id/datePicker"
@@ -216,14 +233,14 @@
     <Button
         android:id="@+id/btn_subir_img_extravio"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="38dp"
         android:layout_gravity="center"
         android:layout_marginLeft="90dp"
         android:layout_marginTop="10dp"
         android:background="@color/rojo"
         android:text="Sube imagen"
         android:textColor="@color/white"
-        android:textSize="10sp" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/btn_publicar"
