@@ -33,13 +33,13 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var spinnerMascota: Spinner
     var foto:String = ""
-    private var idUsuario=0
+    private var idUsuario: Long=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityPublicacionEncontradoBinding.inflate(layoutInflater)
         val view= binding.root
-        idUsuario=intent.getIntExtra("Id",0)
+        idUsuario=intent.getLongExtra("Id",0)
         enableEdgeToEdge()
         setContentView(view)
         database= Firebase.database.getReference("PublicacionesEncontrado")
@@ -150,13 +150,13 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         return bandera
     }
 
-    fun subirDatosAFirebase(tipo:String, tienePlaca:Boolean, sexo:String, raza:String, ubicacion:String, fecha:String, descripcion: String, foto:String, idUsuario: Int) {
+    fun subirDatosAFirebase(tipo:String, tienePlaca:Boolean, sexo:String, raza:String, ubicacion:String, fecha:String, descripcion: String, foto:String, idUsuario: Long) {
         if (tieneInternet(this)){
-            var idEncontrado=0
+            var idEncontrado: Long=0
 
             database.child("IdEncontrado").get().addOnSuccessListener {dataSnapshot ->
                 if(dataSnapshot.exists()){
-                    idEncontrado = dataSnapshot.getValue().toString().toInt()
+                    idEncontrado = dataSnapshot.getValue().toString().toLong()
                 }
                 if (tieneInternet(this)){
                     database.child("Publicacion"+idEncontrado).child("Tipo").setValue(tipo)
