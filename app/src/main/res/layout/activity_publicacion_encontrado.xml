@@ -128,16 +128,32 @@
         android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Ultima vez visto (Ubicación):"/>
+        android:text="Ultima vez visto:"/>
 
-    <Spinner
-        android:id="@+id/spinner_ubicacion_encontrado"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="70dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/black"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_ubicacion_encontrado"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"/>
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:calendarTextColor="@color/black"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

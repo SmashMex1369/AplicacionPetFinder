@@ -34,7 +34,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:text="Tipo de mascota:"/>
 
     <Spinner
@@ -148,7 +148,7 @@
         android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Ultima vez visto (Ubicación):"/>
+        android:text="Ultima vez visto:"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -234,7 +234,7 @@
         android:background="@color/rojo"
         android:text="Publicar"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </LinearLayout>

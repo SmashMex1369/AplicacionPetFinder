@@ -122,12 +122,13 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
             val sexo= binding.spinnerSexoEncontrado.selectedItem.toString()
             val raza= binding.spinnerRazaEncontrado.selectedItem.toString()
             val ubicacion= binding.spinnerUbicacionEncontrado.selectedItem.toString()
+            val fecha= obtenerFecha()
             val descripcion= binding.etDescripcionEncontrado.text.toString()
 
             if (validarCampos(descripcion)){
                 if (tieneInternet(this)){
                     desabilitarCampos()
-                    subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, descripcion,foto,idUsuario)
+                    subirDatosAFirebase(tipoMascota, tienePlaca, sexo, raza, ubicacion, fecha, descripcion,foto,idUsuario)
                 }else {
                     Toast.makeText(this, ContextCompat.getString(this, R.string.sin_conexion),Toast.LENGTH_LONG).show()
                 }
@@ -149,7 +150,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         return bandera
     }
 
-    fun subirDatosAFirebase(tipo:String, tienePlaca:Boolean, sexo:String, raza:String, ubicacion:String, descripcion: String, foto:String, idUsuario: Int) {
+    fun subirDatosAFirebase(tipo:String, tienePlaca:Boolean, sexo:String, raza:String, ubicacion:String, fecha:String, descripcion: String, foto:String, idUsuario: Int) {
         if (tieneInternet(this)){
             var idEncontrado=0
 
@@ -163,6 +164,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
                     database.child("Publicacion"+idEncontrado).child("Sexo").setValue(sexo)
                     database.child("Publicacion"+idEncontrado).child("Raza").setValue(raza)
                     database.child("Publicacion"+idEncontrado).child("Ubicacion").setValue(ubicacion)
+                    database.child("Publicacion"+idEncontrado).child("Fecha").setValue(fecha)
                     database.child("Publicacion"+idEncontrado).child("Descripcion").setValue(descripcion)
                     database.child("Publicacion"+idEncontrado).child("Foto").setValue(foto)
                     database.child("Publicacion"+idEncontrado).child("IdUsuario").setValue(idUsuario)
@@ -198,6 +200,15 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         binding.btnSubirImg.isEnabled=false
         binding.btnPublicarEncontrado.isEnabled=false
         binding.etDescripcionEncontrado.isEnabled=false
+    }
+
+    fun obtenerFecha():String{
+        val fecha: String
+        val dia= binding.datePicker.dayOfMonth
+        val mes= (binding.datePicker.month+1)
+        val anio= binding.datePicker.year
+        fecha= "${dia}/${mes}/ ${anio}"
+        return fecha
     }
 
     fun insertarImagen(view: View) {

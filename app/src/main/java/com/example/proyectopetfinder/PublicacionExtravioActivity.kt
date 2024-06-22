@@ -33,12 +33,12 @@ class PublicacionExtravioActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPublicacionExtravioBinding
     private lateinit var database: DatabaseReference
     var foto: String = ""
-    private var idUsuario=0
+    private var idUsuario:Long=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPublicacionExtravioBinding.inflate(layoutInflater)
         val view = binding.root
-        idUsuario=intent.getIntExtra("Id",0)
+        idUsuario=intent.getLongExtra("Id",0)
         enableEdgeToEdge()
         setContentView(view)
         database = Firebase.database.getReference("PublicacionesExtraviado")
@@ -119,7 +119,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             val tipo = binding.spinnerTipoExtravio.selectedItem.toString()
             val nombre = binding.etNombreExtravio.text.toString()
             val raza = binding.spinnerRazaExtravio.selectedItem.toString()
-            val edad = binding.numberPicker.value
+            val edad = binding.numberPicker.value.toLong()
             val sexo = binding.spinnerSexoExtravio.selectedItem.toString()
             val ubicacion = binding.spinnerUbicacionExtravio.selectedItem.toString()
             val fecha= obtenerFecha()
@@ -157,20 +157,20 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         tipo: String,
         nombre: String,
         raza: String,
-        edad: Int,
+        edad: Long,
         sexo: String,
         ubicacion: String,
         fecha: String,
         descripcion: String,
         foto: String,
-        idUsuario: Int
+        idUsuario: Long
     ) {
         if (tieneInternet(this)) {
-            var idExtraviado = 0
+            var idExtraviado: Long= 0
 
             database.child("IdExtraviado").get().addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot.exists()) {
-                    idExtraviado = dataSnapshot.getValue().toString().toInt()
+                    idExtraviado = dataSnapshot.getValue().toString().toLong()
                 }
                 if (tieneInternet(this)) {
                     database.child("PublicacionExt" + idExtraviado).child("Tipo").setValue(tipo)

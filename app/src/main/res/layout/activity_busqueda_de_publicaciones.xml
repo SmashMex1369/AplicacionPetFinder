@@ -21,9 +21,10 @@
             android:layout_height="wrap_content"
             android:text="@string/tv_buscar"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/itim"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="40sp"
             />
         <ImageView
             android:layout_width="50dp"
