@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/amarilloClaro"
     android:fitsSystemWindows="true"
-    tools:context=".VerPublicacionActivity">
+    tools:context=".actividades.VerPublicacionExtravioActivity">
 
     <View
         android:id="@+id/view_header_publicacion"
@@ -26,6 +26,7 @@
         android:src="@drawable/back_arrow"
         android:contentDescription="@string/img_back_arrow"/>
     <TextView
+        android:id="@+id/tv_titulo_encontrado"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:fontFamily="@font/itim"
@@ -36,7 +37,7 @@
         app:layout_constraintStart_toEndOf="@id/imab_back"
         app:layout_constraintBottom_toBottomOf="@+id/view_header_publicacion"
         android:text="Aa"/>
-    <ImageSwitcher
+    <ImageView
         android:id="@+id/imgswitch_fotos_extravidos"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -49,7 +50,7 @@
         android:fontFamily="@font/itim"
         android:textSize="22sp"
         android:textColor="@color/black"
-        android:text="@string/tv_fecha_extravio"
+        android:text="@string/tv_fecha_encuentro"
         android:textStyle="bold"
         android:gravity="center_horizontal"
         android:layout_marginHorizontal="60dp"

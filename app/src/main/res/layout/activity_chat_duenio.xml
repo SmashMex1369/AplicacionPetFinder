@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/amarilloClaro"
-    tools:context=".ChatDuenioActivity">
+    tools:context=".actividades.ChatDuenioActivity">
 
     <TextView
         android:id="@+id/tv_titulo"

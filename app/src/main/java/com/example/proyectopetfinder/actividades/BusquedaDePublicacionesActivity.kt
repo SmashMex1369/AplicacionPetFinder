@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.graphics.Color
 import android.os.Bundle
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityBusquedaDePublicacionesBinding
 
 

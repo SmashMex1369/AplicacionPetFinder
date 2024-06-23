@@ -11,6 +11,7 @@
     <string name="img_back_arrow">Boton regresar</string>
     <string name="descp_carusel">Imagenes de la mascota</string>
     <string name="tv_fecha_extravio">Fecha de extravió:\n</string>
+    <string name="tv_fecha_encuentro">Fecha de encuentro:\n</string>
     <string name="tv_raza_publicacion">Raza:\n</string>
     <string name="tv_sexo_publicacion">Sexo:\n</string>
     <string name="tv_edad_publicacion">Edad:\n</string>

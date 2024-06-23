@@ -8,7 +8,7 @@
     android:background="@color/amarilloClaro"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".IniciarSesionActivity">
+    tools:context=".actividades.IniciarSesionActivity">
 
     <View
         android:id="@+id/vista_inicio"

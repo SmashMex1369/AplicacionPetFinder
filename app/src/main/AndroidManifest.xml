@@ -16,45 +16,48 @@
         android:theme="@style/Theme.ProyectoPetFinder"
         tools:targetApi="31">
         <activity
-            android:name=".IniciarSesionActivity"
+            android:name=".actividades.IniciarSesionActivity"
             android:exported="false" />
         <activity
-            android:name=".VerPublicacionActivity"
+            android:name=".actividades.VerPublicacionExtravioActivity"
             android:exported="true">
-
         </activity>
         <activity
-            android:name=".ChatDuenioActivity"
+            android:name=".actividades.VerPublicacionEncontradoActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".actividades.ChatDuenioActivity"
             android:exported="true"
             android:screenOrientation="nosensor" />
 
         <activity
-            android:name=".ChatsActivity"
+            android:name=".actividades.ChatsActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatBusquedaActivity"
+            android:name=".actividades.ChatBusquedaActivity"
             android:exported="true"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".BusquedaDePublicacionesActivity"
+            android:name=".actividades.BusquedaDePublicacionesActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".MainPageActivity"
+            android:name=".actividades.MainPageActivity"
             android:exported="true"
             android:screenOrientation="nosensor">
 
         </activity>
         <activity
-            android:name=".CrearCuentaActivity"
+            android:name=".actividades.CrearCuentaActivity"
             android:exported="true"
             android:screenOrientation="nosensor">
 
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".actividades.MainActivity"
             android:exported="true"
             android:screenOrientation="nosensor">
             <intent-filter>
@@ -65,7 +68,7 @@
         </activity>
 
         <activity
-            android:name=".PublicacionExtravioActivity"
+            android:name=".actividades.PublicacionExtravioActivity"
             android:exported="true">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,7 +78,7 @@
         </activity>
 
         <activity
-            android:name=".PublicacionEncontradoActivity"
+            android:name=".actividades.PublicacionEncontradoActivity"
             android:exported="true">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />

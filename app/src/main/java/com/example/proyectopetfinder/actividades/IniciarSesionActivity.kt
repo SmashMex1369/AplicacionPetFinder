@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityIniciarSesionBinding
 import com.example.proyectopetfinder.poko.Chat
 import com.example.proyectopetfinder.poko.Usuario
@@ -35,7 +36,7 @@ class IniciarSesionActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(view)
         cargarCredenciales()
-        window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
         binding.btnIniciarSesion.setOnClickListener {

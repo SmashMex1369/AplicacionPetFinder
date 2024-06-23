@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityPublicacionEncontradoBinding
 import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
@@ -164,7 +165,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
                     database.child("Publicacion"+idEncontrado).child("Sexo").setValue(sexo)
                     database.child("Publicacion"+idEncontrado).child("Raza").setValue(raza)
                     database.child("Publicacion"+idEncontrado).child("Ubicacion").setValue(ubicacion)
-                    database.child("Publicacion"+idEncontrado).child("Fecha").setValue(fecha)
+                    database.child("Publicacion"+idEncontrado).child("Fecha de encontrado").setValue(fecha)
                     database.child("Publicacion"+idEncontrado).child("Descripcion").setValue(descripcion)
                     database.child("Publicacion"+idEncontrado).child("Foto").setValue(foto)
                     database.child("Publicacion"+idEncontrado).child("IdUsuario").setValue(idUsuario)

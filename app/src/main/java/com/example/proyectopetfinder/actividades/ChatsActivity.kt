@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityChatsBinding
 import com.example.proyectopetfinder.poko.Chat
 import com.example.proyectopetfinder.poko.UltimoChat
@@ -34,7 +35,7 @@ class ChatsActivity : AppCompatActivity() {
         dataBase = Firebase.database.reference
         setContentView(binding.root)
 
-        window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
         usuario = intent.getStringExtra("usuario").toString()

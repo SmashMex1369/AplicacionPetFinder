@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityCrearCuentaBinding
 import com.example.proyectopetfinder.utilidades.Internet.tieneInternet
 import com.example.proyectopetfinder.utilidades.Internet.perdioConexion
@@ -34,7 +35,7 @@ class CrearCuentaActivity : AppCompatActivity() {
         setContentView(view)
         habilitarCampos()
         database = Firebase.database.getReference("Usuarios")
-        window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
         binding.btnRegistrar.setOnClickListener {

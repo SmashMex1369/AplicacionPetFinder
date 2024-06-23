@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_encuentro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/imgv_publicacion"
+                android:id="@+id/imgv_publicacion_encuentro"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:src="@drawable/lupa"
@@ -34,7 +35,7 @@
                 android:gravity="center_horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_fecha_encuentro_recycler"
-                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion"/>
+                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion_encuentro"/>
             <TextView
                 android:id="@+id/tv_fecha_encuentro_recycler"
                 android:layout_width="0dp"
@@ -43,8 +44,8 @@
                 android:fontFamily="@font/itim"
                 android:textColor="@color/black"
                 android:text="Fecha"
-                android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion"
+                android:textSize="25sp"
+                app:layout_constraintTop_toBottomOf="@id/imgv_publicacion_encuentro"
                 app:layout_constraintStart_toEndOf="@id/tv_tipo_encuentro_recycler"
                 app:layout_constraintBottom_toTopOf="@id/tv_placa_encuentro_recycler"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -52,7 +53,7 @@
                 android:id="@+id/tv_sexo_encuentro_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="25sp"
                 android:gravity="center"
                 android:fontFamily="@font/itim"
                 android:text="Sexo"
@@ -65,7 +66,7 @@
                 android:id="@+id/tv_placa_encuentro_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="25sp"
                 android:paddingVertical="2dp"
                 android:text="Placa"
                 android:gravity="center"

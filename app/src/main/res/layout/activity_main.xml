@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="@color/amarilloClaro"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".actividades.MainActivity">
 
     <View
         android:id="@+id/vista_inicio"

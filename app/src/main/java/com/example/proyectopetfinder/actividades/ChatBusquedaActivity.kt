@@ -1,36 +1,34 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.app.Activity
-import android.graphics.Color
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.proyectopetfinder.databinding.ActivityChatDuenioBinding
+import com.example.proyectopetfinder.R
+import com.example.proyectopetfinder.adaptadores.ChatAdapter
+import com.example.proyectopetfinder.databinding.ActivityChatBusquedaBinding
+import com.example.proyectopetfinder.poko.Chat
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.example.proyectopetfinder.poko.Chat
-import com.example.proyectopetfinder.adaptadores.ChatAdapter
-import com.google.firebase.database.getValue
-import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
-import android.provider.MediaStore
-import android.util.Base64
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-class ChatDuenioActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityChatDuenioBinding
+class ChatBusquedaActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityChatBusquedaBinding
     private lateinit var dataBase: DatabaseReference
     private var remitente = ""
     private var destino = ""
@@ -38,11 +36,9 @@ class ChatDuenioActivity : AppCompatActivity() {
     val mensajesList = mutableListOf<Chat>()
     private lateinit var chatAdapter: ChatAdapter
     private val PICK_IMAGE_REQUEST = 1
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChatDuenioBinding.inflate(layoutInflater)
+        binding = ActivityChatBusquedaBinding.inflate(layoutInflater)
         dataBase = Firebase.database.reference
         setContentView(binding.root)
 
@@ -50,7 +46,7 @@ class ChatDuenioActivity : AppCompatActivity() {
         configurarRecyclerChat()
         cargarDatosFirebase()
 
-        window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
         binding.btnEnviar.setOnClickListener {
@@ -84,7 +80,7 @@ class ChatDuenioActivity : AppCompatActivity() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val uri: Uri? = data.data
             try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
                 imagen = bitmapToString(bitmap)
                 binding.btnImagenSeleccionada.setImageBitmap(bitmap)
                 binding.llImagen.visibility = View.VISIBLE
@@ -95,7 +91,6 @@ class ChatDuenioActivity : AppCompatActivity() {
             }
         }
     }
-
 
     fun cargarDatosChat(){
         remitente = intent.getStringExtra("usuario")!!
@@ -114,15 +109,14 @@ class ChatDuenioActivity : AppCompatActivity() {
     }
 
     fun cargarDatosFirebase(){
-        dataBase.child("Mensajes").addValueEventListener(object : ValueEventListener{
+        dataBase.child("Mensajes").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 mensajesList.clear() // Limpiar la lista antes de agregar nuevos mensajes
                 for (data in snapshot.children) {
                     val mensaje = data.getValue(Chat::class.java)
                     if (mensaje != null) {
                         // Filtrar mensajes por origen y destino
-                        if ((mensaje.Origen == remitente && mensaje.Destino == destino) ||
-                            (mensaje.Origen == destino && mensaje.Destino == remitente)) {
+                        if (mensaje.Destino == destino) {
                             if(mensaje.Origen == remitente){
                                 mensaje.Origen = "Yo"
                             }
@@ -168,7 +162,7 @@ class ChatDuenioActivity : AppCompatActivity() {
 
     private fun configurarRecyclerChat(){
         chatAdapter = ChatAdapter(mensajesList)
-        binding.recycleNotas.layoutManager = LinearLayoutManager(this@ChatDuenioActivity)
+        binding.recycleNotas.layoutManager = LinearLayoutManager(this@ChatBusquedaActivity)
         binding.recycleNotas.setHasFixedSize(true)
         binding.recycleNotas.adapter = chatAdapter
     }

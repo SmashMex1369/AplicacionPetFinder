@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPageActivity"
+    tools:context=".actividades.MainPageActivity"
     android:fitsSystemWindows="true"
     android:background="@color/amarilloClaro">
 
@@ -196,6 +196,7 @@
         android:paddingHorizontal="3dp"
         android:textSize="17sp"
         android:textColor="@color/black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fab_encontrado"
         app:layout_constraintEnd_toStartOf="@+id/fab_encontrado"
         app:layout_constraintTop_toTopOf="@+id/fab_encontrado"/>
@@ -220,6 +221,7 @@
         android:paddingHorizontal="3dp"
         android:textSize="17sp"
         android:textColor="@color/black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fab_perdido"
         app:layout_constraintEnd_toStartOf="@+id/fab_perdido"
         app:layout_constraintTop_toTopOf="@+id/fab_perdido"/>

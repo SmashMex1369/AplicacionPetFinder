@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityPublicacionExtravioBinding
 import com.example.proyectopetfinder.poko.Usuario
 import com.google.firebase.Firebase
@@ -226,7 +227,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         val dia= binding.datePicker.dayOfMonth
         val mes= (binding.datePicker.month+1)
         val anio= binding.datePicker.year
-        fecha= "${dia}/${mes}/ ${anio}"
+        fecha= "${dia}/${mes}/${anio}"
         return fecha
     }
 

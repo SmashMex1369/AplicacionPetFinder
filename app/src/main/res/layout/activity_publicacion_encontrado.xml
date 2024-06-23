@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/amarilloClaro"
     android:orientation="vertical"
-    tools:context=".PublicacionEncontradoActivity">
+    tools:context=".actividades.PublicacionEncontradoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

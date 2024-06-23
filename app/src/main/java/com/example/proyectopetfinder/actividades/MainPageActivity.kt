@@ -1,4 +1,4 @@
-package com.example.proyectopetfinder
+package com.example.proyectopetfinder.actividades
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,13 +11,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.proyectopetfinder.R
+import com.example.proyectopetfinder.adaptadores.PublicacionEncuentroAdapter
 import com.example.proyectopetfinder.adaptadores.PublicacionExtravioAdapter
 import com.example.proyectopetfinder.databinding.ActivityMainPageBinding
+import com.example.proyectopetfinder.interfaces.ListenerRecyclerEncontrado
 import com.example.proyectopetfinder.interfaces.ListenerRecyclerExtraviado
+import com.example.proyectopetfinder.poko.PublicacionEncontrado
 import com.example.proyectopetfinder.poko.PublicacionExtravio
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,26 +28,30 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 
-class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado {
+class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,ListenerRecyclerEncontrado {
     private lateinit var binding : ActivityMainPageBinding
     private lateinit var databasePerdidos :DatabaseReference
+    private lateinit var databaseEncontrados :DatabaseReference
     private var nombre:String? = ""
     private var id:Long = 0
     private var fabsVisibles = false
     private lateinit var perdidosAdapter: PublicacionExtravioAdapter
     private var perdidosList:MutableList<PublicacionExtravio> = mutableListOf()
+    private lateinit var encontradosAdapter: PublicacionEncuentroAdapter
+    private var encontradosList:MutableList<PublicacionEncontrado> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nombre = intent.getStringExtra("Nombre")
         id = intent.getLongExtra("Id",0)
         binding = ActivityMainPageBinding.inflate(layoutInflater)
         databasePerdidos = Firebase.database.getReference("PublicacionesExtraviado")
+        databaseEncontrados = Firebase.database.getReference("PublicacionesEncontrado")
         val view = binding.root
         ocultarFABs()
         configurarRecyclerPerdidos()
         enableEdgeToEdge()
         setContentView(view)
-        window.statusBarColor = ContextCompat.getColor(this,R.color.rojo)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
         window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
 
         binding.tvPerdidos.setOnClickListener{
@@ -141,33 +146,37 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado {
         binding.viewPerdidos.setBackgroundColor(Color.TRANSPARENT)
         binding.tvEncontrados.setTypeface(typeface,Typeface.BOLD)
         binding.viewEncontrados.setBackgroundResource(R.color.black)
-
+        recuperarPublicacionesEncontrados()
+        encontradosAdapter=PublicacionEncuentroAdapter(encontradosList,this)
+        binding.publicacionesRecycler.adapter=encontradosAdapter
     }
 
     private fun recuperarPublicacionesPerdidos(){
+
         databasePerdidos.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                var perdido  = PublicacionExtravio()
                 perdidosList.clear()
+                var i = 0
                 for(perdidos in snapshot.children){
                     if(perdidos.hasChild("Tipo")){
+                        val perdido= PublicacionExtravio()
                         perdido.nombre = perdidos.child("Nombre").value.toString()
                         perdido.tipo = perdidos.child("Tipo").value.toString()
                         perdido.sexo = perdidos.child("Sexo").value.toString()
                         perdido.edad = perdidos.child("Edad").value as? Long
-                        perdido.fecha = perdidos.child("Fecha").value.toString()
+                        perdido.fecha = perdidos.child("Fecha de extraviado").value.toString()
                         perdido.descripcion = perdidos.child("Descripcion").value.toString()
                         perdido.raza = perdidos.child("Raza").value.toString()
                         perdido.ubicacion = perdidos.child("UbicacionUltimaVezVisto").value.toString()
                         perdido.foto = perdidos.child("Foto").value.toString()
                         perdido.idExtraviado = perdidos.child("IdExtraviado").value as? Long
-                        perdido.idUsuario= (perdidos.child("IdUsuario").value as? Long)
-                        perdidosList.add(perdido)
-                        Log.i("Completado","Se agrego la publicacion con id ${perdido.idExtraviado}")
-                    }
+                        perdido.idUsuario= perdidos.child("IdUsuario").value as? Long
+                        perdidosList.add(i,perdido)
+                        i++
 
+                    }
+                    perdidosAdapter.notifyDataSetChanged()
                 }
-                perdidosAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -177,10 +186,51 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado {
         })
     }
 
+    private fun recuperarPublicacionesEncontrados(){
+
+        databaseEncontrados.addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                encontradosList.clear()
+                var i = 0
+                for(encontrados in snapshot.children){
+                    if(encontrados.hasChild("Tipo")){
+                        val encontrado= PublicacionEncontrado()
+                        encontrado.tipo = encontrados.child("Tipo").value.toString()
+                        Log.i("Dato booleano",encontrados.child("Placa").value.toString())
+                        encontrado.placa = encontrados.child("Placa").value as? Boolean
+                        Log.i("Dato booleano",encontrado.placa.toString())
+                        encontrado.sexo = encontrados.child("Sexo").value.toString()
+                        encontrado.fecha = encontrados.child("Fecha de encontrado").value.toString()
+                        encontrado.descripcion = encontrados.child("Descripcion").value.toString()
+                        encontrado.raza = encontrados.child("Raza").value.toString()
+                        encontrado.ubicacion = encontrados.child("UbicacionUltimaVezVisto").value.toString()
+                        encontrado.foto = encontrados.child("Foto").value.toString()
+                        encontrado.idEncontrado = encontrados.child("IdEncontrado").value as? Long
+                        encontrado.idUsuario= encontrados.child("IdUsuario").value as? Long
+                        encontradosList.add(i,encontrado)
+                        i++
+                    }
+                    encontradosAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@MainPageActivity,"Error al acceder a la base de datos",Toast.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
+
     override fun clicPublicacion(extraviado: PublicacionExtravio) {
-        val intent = Intent(this,VerPublicacionActivity::class.java)
+        val intent = Intent(this,VerPublicacionExtravioActivity::class.java)
         intent.putExtra("NombreExtraviado",extraviado.nombre)
         startActivity(intent)
 
+    }
+
+    override fun clicPublicacion(encontrado: PublicacionEncontrado) {
+        val intent = Intent(this,VerPublicacionEncontradoActivity::class.java)
+        startActivity(intent)
     }
 }

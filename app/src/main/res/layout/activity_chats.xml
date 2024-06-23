@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/amarilloClaro"
-    tools:context=".ChatsActivity">
+    tools:context=".actividades.ChatsActivity">
 
     <TextView
         android:id="@+id/tv_titulo"
