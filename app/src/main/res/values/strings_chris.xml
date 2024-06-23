@@ -15,7 +15,9 @@
     <string name="tv_raza_publicacion">Raza:\n</string>
     <string name="tv_sexo_publicacion">Sexo:\n</string>
     <string name="tv_edad_publicacion">Edad:\n</string>
+    <string name="tv_placa_publicacion">Placa:\n</string>
     <string name="tv_ultima_vez">Visto por ultima vez en:\n</string>
+    <string name="tv_lugar_encontrado">Encontrado en:\n</string>
     <string name="btn_chat_grupal">Unirse al\nchat grupal</string>
     <string name="btn_contactar_dueño">Contactar al\ndueño</string>
     <string name="btn_iniciar_sesion">Ingresar</string>

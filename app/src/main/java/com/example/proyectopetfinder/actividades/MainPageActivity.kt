@@ -196,14 +196,12 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
                     if(encontrados.hasChild("Tipo")){
                         val encontrado= PublicacionEncontrado()
                         encontrado.tipo = encontrados.child("Tipo").value.toString()
-                        Log.i("Dato booleano",encontrados.child("Placa").value.toString())
                         encontrado.placa = encontrados.child("Placa").value as? Boolean
-                        Log.i("Dato booleano",encontrado.placa.toString())
                         encontrado.sexo = encontrados.child("Sexo").value.toString()
                         encontrado.fecha = encontrados.child("Fecha de encontrado").value.toString()
                         encontrado.descripcion = encontrados.child("Descripcion").value.toString()
                         encontrado.raza = encontrados.child("Raza").value.toString()
-                        encontrado.ubicacion = encontrados.child("UbicacionUltimaVezVisto").value.toString()
+                        encontrado.ubicacion = encontrados.child("Ubicacion").value.toString()
                         encontrado.foto = encontrados.child("Foto").value.toString()
                         encontrado.idEncontrado = encontrados.child("IdEncontrado").value as? Long
                         encontrado.idUsuario= encontrados.child("IdUsuario").value as? Long
@@ -223,14 +221,36 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
 
 
     override fun clicPublicacion(extraviado: PublicacionExtravio) {
-        val intent = Intent(this,VerPublicacionExtravioActivity::class.java)
+        val intent=Intent(this, VerPublicacionExtravioActivity::class.java)
         intent.putExtra("NombreExtraviado",extraviado.nombre)
+        intent.putExtra("TipoExtraviado",extraviado.tipo)
+        intent.putExtra("SexoExtraviado",extraviado.sexo)
+        intent.putExtra("EdadExtraviado",extraviado.edad)
+        intent.putExtra("FechaExtraviado",extraviado.fecha)
+        intent.putExtra("DescripcionExtraviado",extraviado.descripcion)
+        intent.putExtra("RazaExtraviado",extraviado.raza)
+        intent.putExtra("UbicacionExtraviado",extraviado.ubicacion)
+        intent.putExtra("IdExtraviado",extraviado.idExtraviado)
+        intent.putExtra("IdUsuarioBase",extraviado.idUsuario)
+        intent.putExtra("Nombre",nombre)
+        intent.putExtra("IdUsuarioActual",id)
         startActivity(intent)
 
     }
 
     override fun clicPublicacion(encontrado: PublicacionEncontrado) {
         val intent = Intent(this,VerPublicacionEncontradoActivity::class.java)
+        intent.putExtra("TipoEncontrado",encontrado.tipo)
+        intent.putExtra("PlacaEncontrado",encontrado.placa)
+        intent.putExtra("FechaEncontrado",encontrado.fecha)
+        intent.putExtra("SexoEncontrado",encontrado.sexo)
+        intent.putExtra("RazaEncontrado",encontrado.raza)
+        intent.putExtra("UbicacionEncontrado",encontrado.ubicacion)
+        intent.putExtra("DescripcionEncontrado",encontrado.descripcion)
+        intent.putExtra("IdEncontrado",encontrado.idEncontrado)
+        intent.putExtra("IdUsuarioBase",encontrado.idUsuario)
+        intent.putExtra("Nombre",nombre)
+        intent.putExtra("IdUsuarioActual",id)
         startActivity(intent)
     }
 }

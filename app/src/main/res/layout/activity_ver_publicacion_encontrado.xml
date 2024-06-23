@@ -38,13 +38,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_header_publicacion"
         android:text="Aa"/>
     <ImageView
-        android:id="@+id/imgswitch_fotos_extravidos"
+        android:id="@+id/imgv_foto_encontrados"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         android:contentDescription="@string/descp_carusel"
         app:layout_constraintTop_toBottomOf="@id/view_header_publicacion"/>
     <TextView
-        android:id="@+id/tv_fecha_extravio"
+        android:id="@+id/tv_fecha_encontrado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/itim"
@@ -54,7 +54,7 @@
         android:textStyle="bold"
         android:gravity="center_horizontal"
         android:layout_marginHorizontal="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/imgswitch_fotos_extravidos"/>
+        app:layout_constraintTop_toBottomOf="@+id/imgv_foto_encontrados"/>
 
 
     <LinearLayout
@@ -62,8 +62,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/tv_fecha_extravio">
+        app:layout_constraintTop_toBottomOf="@+id/tv_fecha_encontrado">
         <TextView
+            android:id="@+id/tv_raza_encontrado"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -74,6 +75,7 @@
             android:gravity="center_horizontal"
             android:text="@string/tv_raza_publicacion"/>
         <TextView
+            android:id="@+id/tv_sexo_encontrado"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -84,6 +86,7 @@
             android:gravity="center_horizontal"
             android:text="@string/tv_sexo_publicacion"/>
         <TextView
+            android:id="@+id/tv_placa_encontrado"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -96,23 +99,30 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_ultima_vez"
+        android:id="@+id/tv_lugar_encuentro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
         android:fontFamily="@font/itim"
-        android:text="@string/tv_ultima_vez"
-        android:layout_marginHorizontal="30dp"
+        android:text="@string/tv_lugar_encontrado"
+        android:layout_marginHorizontal="70dp"
         app:layout_constraintTop_toBottomOf="@+id/linear_datos"
         android:background="@color/naranjaClaro"
         android:gravity="center_horizontal"/>
 
-    <ScrollView
+    <TextView
+        android:id="@+id/tv_descripcion_encontrado"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_ultima_vez"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:padding="15dp"
+        android:layout_margin="18dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_lugar_encuentro"
         app:layout_constraintBottom_toTopOf="@id/linear_botones"/>
     <LinearLayout
         android:id="@+id/linear_botones"
