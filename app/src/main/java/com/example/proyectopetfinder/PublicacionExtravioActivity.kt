@@ -95,10 +95,10 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             }
         }
 
-        val numberPicker: NumberPicker = findViewById(R.id.numberPicker)
-        numberPicker.minValue = 1
-        numberPicker.maxValue = 20
-        numberPicker.wrapSelectorWheel = false
+        val spinnerEdad: Spinner= findViewById(binding.spinnerEdad.id)
+        val listaEdad= arrayOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20")
+        val adaptadorEdad = ArrayAdapter<String>(this, R.layout.spinner, listaEdad)
+        spinnerEdad.adapter= adaptadorEdad
 
         val spinnerSexo: Spinner = findViewById(binding.spinnerSexoExtravio.id)
         val listaSexo = arrayOf("Hembra", "Macho")
@@ -119,7 +119,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
             val tipo = binding.spinnerTipoExtravio.selectedItem.toString()
             val nombre = binding.etNombreExtravio.text.toString()
             val raza = binding.spinnerRazaExtravio.selectedItem.toString()
-            val edad = binding.numberPicker.value.toLong()
+            val edad = binding.spinnerEdad.selectedItem.toString()
             val sexo = binding.spinnerSexoExtravio.selectedItem.toString()
             val ubicacion = binding.spinnerUbicacionExtravio.selectedItem.toString()
             val fecha= obtenerFecha()
@@ -156,7 +156,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
         tipo: String,
         nombre: String,
         raza: String,
-        edad: Long,
+        edad: String,
         sexo: String,
         ubicacion: String,
         fecha: String,
@@ -176,7 +176,7 @@ class PublicacionExtravioActivity : AppCompatActivity() {
                     database.child("PublicacionExt" + idExtraviado).child("Tipo").setValue(tipo)
                     database.child("PublicacionExt" + idExtraviado).child("Nombre").setValue(nombre)
                     database.child("PublicacionExt" + idExtraviado).child("Raza").setValue(raza)
-                    database.child("PublicacionExt" + idExtraviado).child("Edad").setValue(edad.toInt())
+                    database.child("PublicacionExt" + idExtraviado).child("Edad").setValue(edad.toLong())
                     database.child("PublicacionExt" + idExtraviado).child("Sexo").setValue(sexo)
                     database.child("PublicacionExt" + idExtraviado).child("UbicacionUltimaVezVisto").setValue(ubicacion)
                     database.child("PublicacionExt" + idExtraviado).child("Fecha de extraviado").setValue(fecha)
