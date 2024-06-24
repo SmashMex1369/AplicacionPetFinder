@@ -3,11 +3,13 @@ package com.example.proyectopetfinder.actividades
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -18,10 +20,12 @@ import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.adaptadores.ChatAdapter
 import com.example.proyectopetfinder.databinding.ActivityChatBusquedaBinding
 import com.example.proyectopetfinder.poko.Chat
+import com.example.proyectopetfinder.poko.PublicacionExtravio
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.io.ByteArrayOutputStream
@@ -30,19 +34,23 @@ import java.io.IOException
 class ChatBusquedaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBusquedaBinding
     private lateinit var dataBase: DatabaseReference
+    private lateinit var database2: DatabaseReference
     private var remitente = ""
     private var destino = ""
+    private var fotoMascota = ""
     private var imagen : String = ""
     val mensajesList = mutableListOf<Chat>()
     private lateinit var chatAdapter: ChatAdapter
     private val PICK_IMAGE_REQUEST = 1
+    private var extraviado= PublicacionExtravio()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBusquedaBinding.inflate(layoutInflater)
         dataBase = Firebase.database.reference
-        setContentView(binding.root)
-
         cargarDatosChat()
+        database2 = com.google.firebase.Firebase.database.getReference("PublicacionesExtraviado").child("PublicacionExt${extraviado.idExtraviado}")
+        setContentView(binding.root)
+        cargarImagen()
         configurarRecyclerChat()
         cargarDatosFirebase()
 
@@ -95,7 +103,23 @@ class ChatBusquedaActivity : AppCompatActivity() {
     fun cargarDatosChat(){
         remitente = intent.getStringExtra("usuario")!!
         destino = intent.getStringExtra("destino")!!
+        extraviado.idExtraviado = intent.getLongExtra("idPublicacion",0)!!
         binding.tvDueODe.text = binding.tvDueODe.text.toString().plus(destino)
+    }
+
+    fun cargarImagen(){
+        database2.addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                fotoMascota=snapshot.child("Foto").value.toString()
+                val id = snapshot.child("IdExtraviado").value.toString()
+                binding.ivImagen.setImageBitmap(stringToBitmap(fotoMascota))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@ChatBusquedaActivity,"Error al acceder a la base datos", Toast.LENGTH_LONG).show()
+            }
+
+        })
     }
 
     fun validarCampo():Boolean{
@@ -173,5 +197,15 @@ class ChatBusquedaActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    }
+
+    fun stringToBitmap(encodedString: String): Bitmap? {
+        return try {
+            val decodedString: ByteArray = Base64.decode(encodedString, Base64.DEFAULT)
+            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            null
+        }
     }
 }

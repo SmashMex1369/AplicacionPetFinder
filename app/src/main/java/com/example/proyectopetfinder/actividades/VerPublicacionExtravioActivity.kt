@@ -1,6 +1,7 @@
 package com.example.proyectopetfinder.actividades
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -44,6 +45,24 @@ class VerPublicacionExtravioActivity : AppCompatActivity() {
         binding.imabBack.setOnClickListener {
             finish()
         }
+
+        binding.btnChatGrupal.setOnClickListener {
+            clicChatGrupal()
+        }
+    }
+
+    private fun clicChatGrupal(){
+        val intent = Intent(this,ChatBusquedaActivity::class.java)
+        intent.putExtra("usuario",nombre)
+        intent.putExtra("destino",extraviado.nombre)
+        intent.putExtra("idPublicacion",extraviado.idExtraviado)
+        startActivity(intent)
+    }
+
+    private fun clicChatDuenio(){
+        val intent = Intent(this, ChatDuenioActivity::class.java)
+        intent.putExtra("usuario",nombre)
+        startActivity(intent)
     }
 
     private fun agregarIntents(){

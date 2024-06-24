@@ -131,16 +131,9 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent">
+
         <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:layout_marginHorizontal="15dp"
-            android:fontFamily="@font/itim"
-            android:textColor="@color/black"
-            android:text="@string/btn_chat_grupal"/>
-        <Button
+            android:id="@+id/btn_contactar_duenio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
