@@ -64,6 +64,11 @@ class ChatsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        guardarNoMensajes(usuarios,noMensajes)
+    }
+
     fun cargarDatosFirebase(){
         dataBase.child("Mensajes").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -75,10 +80,13 @@ class ChatsActivity : AppCompatActivity() {
                         if (mensaje.Destino == usuario) {
                             if(usuarios.contains(mensaje.Origen)){
                                 val noUsuario = usuarios.indexOf(mensaje.Origen)
+                                Toast.makeText(this@ChatsActivity,mensaje.Origen + " pos " + noUsuario,Toast.LENGTH_SHORT).show()
                                 noMensajes.set(noUsuario,noMensajes.get(noUsuario)+1)
                             }else{
                                 usuarios.add(mensaje.Origen)
                                 noMensajes.add(1)
+
+                                Toast.makeText(this@ChatsActivity,"Firebase: "+usuarios.last() + noMensajes.last(),Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -98,7 +106,6 @@ class ChatsActivity : AppCompatActivity() {
     }
 
     fun abrirConversacion(usuario2 : String){
-        guardarNoMensajes(usuarios,noMensajes)
         val intent = Intent(this,ChatDuenioActivity::class.java)
         intent.putExtra("usuario",usuario)
         intent.putExtra("destino",usuario2)
@@ -107,20 +114,22 @@ class ChatsActivity : AppCompatActivity() {
 
     fun cargarNoMensajes(usuarios: List<String>): MutableList<Int> {
         val lista = mutableListOf<Int>()
-        val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE)
+        val preferenciasUno = getPreferences(Context.MODE_PRIVATE)
         for (usuario in usuarios){
             lista.add(preferenciasUno.getInt(usuario.toString(),0) )
+            Toast.makeText(this,"Cargado "+usuario + " "+ preferenciasUno.getInt(usuario.toString(),0),Toast.LENGTH_SHORT).show()
         }
         return lista
     }
 
     fun guardarNoMensajes(lista : List<String>, lista2 : List<Int>){
-        val archPreferenciasDefault = getPreferences(Context.MODE_PRIVATE)
-        val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE) //Para llamar a otro prefernces que no sea el default
-        with(preferenciasUno.edit()){//Te crea automaticamente una variable en la cual trabajas en los
+        val preferencias = getPreferences(Context.MODE_PRIVATE)
+        //val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE) //Para llamar a otro prefernces que no sea el default
+        with(preferencias.edit()){//Te crea automaticamente una variable en la cual trabajas en los
             //parentesis. Sirve para no necesitar crear una variable y llamar sus datos con '.'
             for (usuario in lista){
                 putInt(usuario,lista2.get( lista.indexOf(usuario) ))
+                Toast.makeText(this@ChatsActivity,usuario.toString() + lista2.get( lista.indexOf(usuario)),Toast.LENGTH_SHORT)
             }
             //.commit() sirve para el apply pero detiene el programa
             apply()
