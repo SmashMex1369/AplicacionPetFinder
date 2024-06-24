@@ -1,5 +1,6 @@
 package com.example.proyectopetfinder.actividades
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -75,22 +76,24 @@ class BusquedaDePublicacionesActivity : AppCompatActivity() {
             }
         }
 
-        /*binding.btnCalendar.setOnClickListener(View.OnClickListener {
-            onClick(view)
-        })*/
-
         val spinnerRegion: Spinner = findViewById(binding.spinner3.id)
         val listaRegion = arrayOf("ArcoSur", "Tecnológico","Economía", "Centro")
         val adaptadorRegion = ArrayAdapter<String>(this, R.layout.spinner, listaRegion)
         spinnerRegion.adapter = adaptadorRegion
 
+        binding.btnBuscar.setOnClickListener {
+            binding.linearBotones.visibility=View.VISIBLE
+            binding.recyclerBusqueda.visibility=View.VISIBLE
+        }
+
     }
 
-    /*fun onClick(view:View){
+    fun obtenerFecha():String{
+        val fecha: String
         val dia= binding.datePicker.dayOfMonth
         val mes= (binding.datePicker.month+1)
-        val anio=binding.datePicker.year
-
-        binding.etCalendario.setText("Fecha: ${dia} / ${mes} / ${anio}")
-    }*/
+        val anio= binding.datePicker.year
+        fecha= "${dia}/${mes}/ ${anio}"
+        return fecha
+    }
 }

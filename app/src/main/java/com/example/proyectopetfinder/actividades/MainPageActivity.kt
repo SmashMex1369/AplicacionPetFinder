@@ -253,4 +253,12 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
         intent.putExtra("IdUsuarioActual",id)
         startActivity(intent)
     }
+
+    fun buscarPublicaciones(){
+        val intent= Intent(this,BusquedaDePublicacionesActivity::class.java)
+        val tipoMascota=intent.getStringExtra("Tipo de mascota")
+        val raza=intent.getStringExtra("Raza")
+        val fecha=intent.getStringExtra("Fecha")
+        val region=intent.getStringExtra("Region")
+    }
 }
