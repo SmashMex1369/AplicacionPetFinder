@@ -19,7 +19,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white"
+                >
                 <ImageView
                     android:id="@+id/iv_perfil"
                     android:layout_marginStart="10dp"
@@ -36,6 +38,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:fontFamily="@font/itim"
+                    android:textColor="@color/black"
                     android:text="Usuario"/>
             </LinearLayout>
 
@@ -43,19 +46,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/midwhite">
+
                 <TextView
                     android:id="@+id/tv_contenido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/itim"
                     android:text="Contenido del mensaje"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/iv_imagen"

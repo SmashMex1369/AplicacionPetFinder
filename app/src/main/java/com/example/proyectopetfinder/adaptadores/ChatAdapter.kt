@@ -38,9 +38,9 @@ class ChatAdapter(val chats : List<Chat>) : RecyclerView.Adapter<ChatAdapter.Vie
         val chat = chats.get(position)
         holder.tvUsuario.text = chat.Origen
         holder.tvContenido.text = chat.Contenido
-        if(chat.Origen == "Yo"){
+        /*if(chat.Origen == "Yo"){
             holder.llChat.setBackgroundColor(R.color.rojoOscuro)
-        }
+        }*/
         if((chat.Imagen!= null)||(chat.Imagen!="")){
             holder.ivImagen.setImageBitmap(stringToBitmap(chat.Imagen.toString()))
         }
