@@ -208,7 +208,7 @@ class PublicacionEncontradoActivity : AppCompatActivity() {
         val dia= binding.datePicker.dayOfMonth
         val mes= (binding.datePicker.month+1)
         val anio= binding.datePicker.year
-        fecha= "${dia}/${mes}/ ${anio}"
+        fecha= "${dia}/${mes}/${anio}"
         return fecha
     }
 

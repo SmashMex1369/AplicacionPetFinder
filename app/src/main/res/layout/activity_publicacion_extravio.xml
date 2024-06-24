@@ -70,6 +70,7 @@
             android:layout_height="42dp"
             android:layout_weight="1"
             android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/black"
             android:layout_marginStart="8dp"
             tools:ignore="Suspicious0dp" />
 
@@ -101,7 +102,6 @@
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
-        android:hint="Escribe aquí..."
         android:layout_marginTop="3dp"/>
 
     <LinearLayout
@@ -146,12 +146,16 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:backgroundTint="@color/black"
+            android:spinnerMode="dialog"
             android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/spinner_sexo_extravio"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:backgroundTint="@color/black"
             android:layout_weight="1"
             android:layout_marginTop="1dp"
             />
@@ -179,6 +183,7 @@
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
+        android:backgroundTint="@color/black"
         android:layout_gravity="center_vertical"
         android:layout_weight="1" />
 
@@ -189,6 +194,8 @@
             android:layout_marginTop="5dp"
             android:calendarTextColor="@color/black"
             android:calendarViewShown="false"
+            android:background="@color/amarilloMedio"
+            style="@style/ColorDatePicker"
             android:datePickerMode="spinner" />
 
     </LinearLayout>
@@ -212,7 +219,6 @@
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
-        android:hint="Escribe aquí..."
         android:layout_marginTop="3dp"
         />
 
@@ -236,23 +242,23 @@
         android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/rojo"
+        android:backgroundTint="@color/rojo"
         android:text="Sube imagen"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
     <Button
         android:id="@+id/btn_publicar"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@color/rojo"
+        android:backgroundTint="@color/rojo"
         android:text="Publicar"
+        android:paddingHorizontal="60dp"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
 </LinearLayout>

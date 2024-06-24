@@ -28,6 +28,7 @@ import com.google.firebase.database.database
 import java.io.ByteArrayOutputStream
 import com.example.proyectopetfinder.utilidades.Internet.tieneInternet
 import com.example.proyectopetfinder.utilidades.Internet.perdioConexion
+import java.util.Calendar
 
 class PublicacionExtravioActivity : AppCompatActivity() {
 

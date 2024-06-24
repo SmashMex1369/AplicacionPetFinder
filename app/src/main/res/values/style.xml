@@ -18,4 +18,8 @@
         <item name="backgroundColor">@color/naranjaClaro</item>
     </style>
 
+    <style name="ColorDatePicker" parent="android:Widget.DatePicker">
+        <item name="background">@color/amarilloMedio</item>
+    </style>
+
 </resources>

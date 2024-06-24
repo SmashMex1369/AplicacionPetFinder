@@ -97,12 +97,13 @@
 
     <DatePicker
         android:id="@+id/datePicker"
+        style="@style/ColorDatePicker"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
+        android:background="@color/amarilloMedio"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:calendarViewShown="false"
-        android:calendarTextColor="@color/black"
         android:datePickerMode="spinner" />
 
     <TextView
@@ -125,13 +126,15 @@
 
     <Button
         android:id="@+id/btn_buscar"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:background="@color/rojo"
+        android:backgroundTint="@color/rojo"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="30dp"
         android:textSize="25sp"
         android:text="@string/tv_buscar"
         />

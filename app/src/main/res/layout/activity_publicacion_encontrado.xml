@@ -89,6 +89,7 @@
             android:layout_height="40dp"
             android:layout_marginHorizontal="20dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/black"
             android:layout_marginTop="1dp"
             />
 
@@ -96,6 +97,7 @@
             android:id="@+id/spinner_sexo_encontrado"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:backgroundTint="@color/black"
             android:layout_weight="1"
             android:layout_marginTop="1dp"
             />
@@ -150,10 +152,11 @@
             android:id="@+id/datePicker"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
+            style="@style/ColorDatePicker"
             android:layout_marginTop="5dp"
+            android:background="@color/amarilloMedio"
             android:calendarTextColor="@color/black"
             android:calendarViewShown="false"
-            android:backgroundTint="@color/black"
             android:datePickerMode="spinner" />
 
     </LinearLayout>
@@ -177,7 +180,6 @@
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
-        android:hint="Escribe aquí..."
         android:layout_marginTop="3dp"
         />
 
@@ -200,24 +202,24 @@
         android:id="@+id/btn_subir_img"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="90dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:background="@color/rojo"
+        android:backgroundTint="@color/rojo"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:text="Sube imagen"/>
 
     <Button
         android:id="@+id/btn_publicar_encontrado"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:background="@color/rojo"
+        android:backgroundTint="@color/rojo"
+        android:paddingHorizontal="60dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="Publicar"/>
 
 </LinearLayout>
