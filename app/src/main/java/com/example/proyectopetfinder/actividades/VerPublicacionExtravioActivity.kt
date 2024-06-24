@@ -28,6 +28,8 @@ class VerPublicacionExtravioActivity : AppCompatActivity() {
     private lateinit var nombre :String
     private var idUsuarioActual :Long = 0
     private lateinit var foto:String
+    private lateinit var database2: DatabaseReference
+    private lateinit var duenio :String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVerPublicacionExtravioBinding.inflate(layoutInflater)
@@ -35,6 +37,7 @@ class VerPublicacionExtravioActivity : AppCompatActivity() {
         idUsuarioActual= intent.getLongExtra("IdUsuarioActual",0)
         agregarIntents()
         database = Firebase.database.getReference("PublicacionesExtraviado").child("PublicacionExt${extraviado.idExtraviado}")
+        database2 = Firebase.database.getReference("Usuarios").child("Usuario${extraviado.idUsuario}")
         insertarDatos()
         val view = binding.root
         enableEdgeToEdge()
@@ -49,6 +52,10 @@ class VerPublicacionExtravioActivity : AppCompatActivity() {
         binding.btnChatGrupal.setOnClickListener {
             clicChatGrupal()
         }
+
+        binding.btnContactarDuenio.setOnClickListener {
+            clicChatDuenio()
+        }
     }
 
     private fun clicChatGrupal(){
@@ -62,6 +69,7 @@ class VerPublicacionExtravioActivity : AppCompatActivity() {
     private fun clicChatDuenio(){
         val intent = Intent(this, ChatDuenioActivity::class.java)
         intent.putExtra("usuario",nombre)
+        intent.putExtra("destino",duenio)
         startActivity(intent)
     }
 
@@ -98,6 +106,17 @@ class VerPublicacionExtravioActivity : AppCompatActivity() {
                 val stringDecodificado = Base64.decode(foto,Base64.DEFAULT)
                 val byteDecodificado = BitmapFactory.decodeByteArray(stringDecodificado,0,stringDecodificado.size)
                 binding.imgvFotoExtravidos.setImageBitmap(byteDecodificado)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@VerPublicacionExtravioActivity,"Error al acceder a la base datos", Toast.LENGTH_LONG).show()
+            }
+
+        })
+
+        database2.addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                duenio=snapshot.child("Nombre").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {

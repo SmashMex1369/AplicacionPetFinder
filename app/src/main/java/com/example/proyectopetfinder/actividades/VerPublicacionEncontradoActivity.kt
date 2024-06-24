@@ -1,6 +1,7 @@
 package com.example.proyectopetfinder.actividades
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
@@ -26,6 +27,8 @@ class VerPublicacionEncontradoActivity : AppCompatActivity() {
     private lateinit var nombre :String
     private var idUsuarioActual :Long = 0
     private lateinit var foto:String
+    private lateinit var database2: DatabaseReference
+    private lateinit var duenio :String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVerPublicacionEncontradoBinding.inflate(layoutInflater)
@@ -33,6 +36,7 @@ class VerPublicacionEncontradoActivity : AppCompatActivity() {
         idUsuarioActual=intent.getLongExtra("IdUsuarioActual",0)
         agregarIntents()
         database = Firebase.database.getReference("PublicacionesEncontrado").child("Publicacion${encontrado.idEncontrado}")
+        database2 = Firebase.database.getReference("Usuarios").child("Usuario${encontrado.idUsuario}")
         insertarDatos()
         val view = binding.root
         enableEdgeToEdge()
@@ -42,6 +46,10 @@ class VerPublicacionEncontradoActivity : AppCompatActivity() {
 
         binding.imabBack.setOnClickListener {
             finish()
+        }
+
+        binding.btnContactarDuenio.setOnClickListener {
+            clicChatDuenio()
         }
     }
 
@@ -55,6 +63,13 @@ class VerPublicacionEncontradoActivity : AppCompatActivity() {
         encontrado.descripcion=intent.getStringExtra("DescripcionEncontrado")!!
         encontrado.idEncontrado=intent.getLongExtra("IdEncontrado",0)
         encontrado.idUsuario=intent.getLongExtra("IdUsuarioBase",0)
+    }
+
+    private fun clicChatDuenio(){
+        val intent = Intent(this, ChatDuenioActivity::class.java)
+        intent.putExtra("usuario",nombre)
+        intent.putExtra("destino",duenio)
+        startActivity(intent)
     }
 
     @SuppressLint("SetTextI18n")
@@ -76,6 +91,17 @@ class VerPublicacionEncontradoActivity : AppCompatActivity() {
                 val stringDecodificado = Base64.decode(foto, Base64.DEFAULT)
                 val byteDecodificado = BitmapFactory.decodeByteArray(stringDecodificado,0,stringDecodificado.size)
                 binding.imgvFotoEncontrados.setImageBitmap(byteDecodificado)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@VerPublicacionEncontradoActivity,"Error al acceder a la base datos", Toast.LENGTH_LONG).show()
+            }
+
+        })
+
+        database2.addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                duenio=snapshot.child("Nombre").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {
