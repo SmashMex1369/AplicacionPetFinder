@@ -4,16 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.proyectopetfinder.R
 import com.example.proyectopetfinder.databinding.ActivityChatsBinding
 import com.example.proyectopetfinder.poko.Chat
-import com.example.proyectopetfinder.poko.UltimoChat
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -29,6 +24,7 @@ class ChatsActivity : AppCompatActivity() {
     var noMensajesGuardados = mutableListOf<Int>()
 
     private var usuario = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatsBinding.inflate(layoutInflater)
@@ -36,102 +32,97 @@ class ChatsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.rojo)
-        window.navigationBarColor = ContextCompat.getColor(this,R.color.rojo)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.rojo)
 
         usuario = intent.getStringExtra("Nombre").toString()
         cargarDatosFirebase()
-
     }
 
+    private fun configurarListView(chats: MutableList<String>) {
+        val chatsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, chats)
 
-    fun configurarListView(chats : MutableList<String>){
-        val chatsAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,
-            chats)
-
-        for(chat in chats){
-            var posicion = usuarios.indexOf(chat)
-            if(noMensajes.get(posicion) > noMensajesGuardados.get(posicion) ){
-                chats.set(posicion,chat + "!!NUEVO MENSAJE¡¡")
-            }
+        for (i in chats.indices) {
+            val chat = chats[i]
+            val posicion = usuarios.indexOf(chat)
+            /*if (posicion != -1 && noMensajes[posicion] > noMensajesGuardados[posicion]) {
+                chats[i] = chat + " ¡¡NUEVO MENSAJE!!"
+            } else if (chat.endsWith(" ¡¡NUEVO MENSAJE!!")) {
+                chats[i] = chat.substring(0, chat.length - " ¡¡NUEVO MENSAJE!!".length)
+            }*/
         }
+
         binding.lvChats.adapter = chatsAdapter
-        binding.lvChats.setOnItemClickListener { adapterView, view, i, l ->
-            var usuario2 = chats.get(i)
-            if(usuario2.endsWith("!!NUEVO MENSAJE¡¡")){
-                usuario2 = usuario2.substring(0,usuario2.length-"!!NUEVO MENSAJE¡¡".length)
+        binding.lvChats.setOnItemClickListener { _, _, i, _ ->
+            var usuario2 = chats[i]
+            if (usuario2.endsWith(" ¡¡NUEVO MENSAJE!!")) {
+                usuario2 = usuario2.substring(0, usuario2.length - " ¡¡NUEVO MENSAJE!!".length)
             }
             abrirConversacion(usuario2)
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        guardarNoMensajes(usuarios,noMensajes)
-    }
-
-    fun cargarDatosFirebase(){
+    private fun cargarDatosFirebase() {
         dataBase.child("Mensajes").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                usuarios.clear()
+                noMensajes.clear()
 
                 for (data in snapshot.children) {
                     val mensaje = data.getValue(Chat::class.java)
-                    if (mensaje != null) {
-                        // Filtrar mensajes por origen y destino
-                        if (mensaje.Destino == usuario) {
-                            if(usuarios.contains(mensaje.Origen)){
-                                val noUsuario = usuarios.indexOf(mensaje.Origen)
-                                Toast.makeText(this@ChatsActivity,mensaje.Origen + " pos " + noUsuario,Toast.LENGTH_SHORT).show()
-                                noMensajes.set(noUsuario,noMensajes.get(noUsuario)+1)
-                            }else{
-                                usuarios.add(mensaje.Origen)
-                                noMensajes.add(1)
-
-                                Toast.makeText(this@ChatsActivity,"Firebase: "+usuarios.last() + noMensajes.last(),Toast.LENGTH_SHORT).show()
-                            }
+                    if (mensaje != null && mensaje.Destino == usuario) {
+                        val noUsuario = usuarios.indexOf(mensaje.Origen)
+                        if (noUsuario != -1) {
+                            noMensajes[noUsuario] = noMensajes[noUsuario] + 1
+                        } else {
+                            usuarios.add(mensaje.Origen)
+                            noMensajes.add(1)
                         }
                     }
-
-
                 }
-                // Aquí puedes utilizar la lista mensajesList como necesites, por ejemplo, actualizar la UI
                 noMensajesGuardados = cargarNoMensajes(usuarios)
                 configurarListView(usuarios)
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                // Manejo del error
             }
-
         })
     }
 
-    fun abrirConversacion(usuario2 : String){
-        val intent = Intent(this,ChatDuenioActivity::class.java)
-        intent.putExtra("usuario",usuario)
-        intent.putExtra("destino",usuario2)
+    private fun abrirConversacion(usuario2: String) {
+        val intent = Intent(this, ChatDuenioActivity::class.java)
+        intent.putExtra("usuario", usuario)
+        intent.putExtra("destino", usuario2)
         startActivity(intent)
+
+        val index = usuarios.indexOf(usuario2)
+        if (index != -1) {
+            noMensajesGuardados[index] = noMensajes[index]
+            guardarNoMensajes(usuarios, noMensajesGuardados)
+        }
     }
 
-    fun cargarNoMensajes(usuarios: List<String>): MutableList<Int> {
+    override fun onResume() {
+        super.onResume()
+        noMensajesGuardados = cargarNoMensajes(usuarios)
+        configurarListView(usuarios)
+    }
+
+    private fun cargarNoMensajes(usuarios: List<String>): MutableList<Int> {
         val lista = mutableListOf<Int>()
-        val preferenciasUno = getPreferences(Context.MODE_PRIVATE)
-        for (usuario in usuarios){
-            lista.add(preferenciasUno.getInt(usuario.toString(),0) )
-            Toast.makeText(this,"Cargado "+usuario + " "+ preferenciasUno.getInt(usuario.toString(),0),Toast.LENGTH_SHORT).show()
+        val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE)
+        for (usuario in usuarios) {
+            lista.add(preferenciasUno.getInt(usuario, 0))
         }
         return lista
     }
 
-    fun guardarNoMensajes(lista : List<String>, lista2 : List<Int>){
-        val preferencias = getPreferences(Context.MODE_PRIVATE)
-        //val preferenciasUno = getSharedPreferences("noMensajes", Context.MODE_PRIVATE) //Para llamar a otro prefernces que no sea el default
-        with(preferencias.edit()){//Te crea automaticamente una variable en la cual trabajas en los
-            //parentesis. Sirve para no necesitar crear una variable y llamar sus datos con '.'
-            for (usuario in lista){
-                putInt(usuario,lista2.get( lista.indexOf(usuario) ))
-                Toast.makeText(this@ChatsActivity,usuario.toString() + lista2.get( lista.indexOf(usuario)),Toast.LENGTH_SHORT)
+    private fun guardarNoMensajes(lista: List<String>, lista2: List<Int>) {
+        val preferencias = getSharedPreferences("noMensajes", Context.MODE_PRIVATE)
+        with(preferencias.edit()) {
+            for (usuario in lista) {
+                putInt(usuario, lista2[lista.indexOf(usuario)])
             }
-            //.commit() sirve para el apply pero detiene el programa
             apply()
         }
     }
