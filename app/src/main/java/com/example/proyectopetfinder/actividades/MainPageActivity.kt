@@ -1,5 +1,7 @@
 package com.example.proyectopetfinder.actividades
 
+import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -8,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -260,5 +263,23 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
         val raza=intent.getStringExtra("Raza")
         val fecha=intent.getStringExtra("Fecha")
         val region=intent.getStringExtra("Region")
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        val builder=AlertDialog.Builder(this)
+        builder.setTitle("Salir")
+        builder.setMessage("¿Esta seguro que desea salir?")
+        builder.setNegativeButton("Cerrar sesión",DialogInterface.OnClickListener { dialog, which ->
+            finish()
+        })
+        builder.setPositiveButton("Cerrar aplicación",DialogInterface.OnClickListener { dialog, which ->
+            finishAffinity()
+        })
+        builder.setNeutralButton("Cancelar",DialogInterface.OnClickListener { dialog, which ->
+            dialog.dismiss()
+        })
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 }
