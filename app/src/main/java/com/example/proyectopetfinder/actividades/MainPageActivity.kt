@@ -86,6 +86,8 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
 
         binding.imgBuscar.setOnClickListener{
             val intent = Intent(this, BusquedaDePublicacionesActivity::class.java)
+            intent.putExtra("Nombre",nombre)
+            intent.putExtra("Id",id)
             startActivity(intent)
         }
 
@@ -104,11 +106,13 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
     override fun onResume() {
         super.onResume()
         ocultarFABs()
+        configurarRecyclerPerdidos()
     }
 
     override fun onRestart() {
         super.onRestart()
         ocultarFABs()
+        configurarRecyclerPerdidos()
     }
     private fun ocultarFABs(){
         binding.fabPublicaciones.shrink()
@@ -255,14 +259,6 @@ class MainPageActivity : AppCompatActivity(),ListenerRecyclerExtraviado,Listener
         intent.putExtra("Nombre",nombre)
         intent.putExtra("IdUsuarioActual",id)
         startActivity(intent)
-    }
-
-    fun buscarPublicaciones(){
-        val intent= Intent(this,BusquedaDePublicacionesActivity::class.java)
-        val tipoMascota=intent.getStringExtra("Tipo de mascota")
-        val raza=intent.getStringExtra("Raza")
-        val fecha=intent.getStringExtra("Fecha")
-        val region=intent.getStringExtra("Region")
     }
 
     @SuppressLint("MissingSuperCall")
