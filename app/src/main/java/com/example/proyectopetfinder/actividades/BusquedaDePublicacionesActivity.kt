@@ -110,7 +110,7 @@ class BusquedaDePublicacionesActivity : AppCompatActivity(),ListenerRecyclerEnco
         binding.btnBuscar.setOnClickListener {
             binding.linearBotones.visibility=View.VISIBLE
             binding.recyclerBusqueda.visibility=View.VISIBLE
-
+            configurarRecyclerPerdidos()
         }
         binding.tvPerdidos.setOnClickListener {
             configurarRecyclerPerdidos()
