@@ -89,31 +89,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Fecha (encontrado o extraviado):"/>
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        style="@style/ColorDatePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:background="@color/amarilloMedio"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="Región:"/>
+        android:text="Ubicacion:"/>
 
     <Spinner
         android:id="@+id/spinner_3"

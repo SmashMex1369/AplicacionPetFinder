@@ -20,7 +20,7 @@ class PublicacionEncuentroAdapter(private val publicacionesEncuentro:List<Public
     RecyclerView.Adapter<PublicacionEncuentroAdapter.PublicacionEncuentroViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): PublicacionEncuentroViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_publicacion_encuentro,parent,false)
-        return PublicacionEncuentroViewHolder(view)
+        return PublicacionEncuentroViewHolder(view) 
     }
 
     override fun onBindViewHolder(holder: PublicacionEncuentroViewHolder, position: Int) {
